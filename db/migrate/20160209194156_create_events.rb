@@ -4,13 +4,9 @@ class CreateEvents < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.string :tag
-      t.string :text
-      t.string :time
-      t.string :datetime
+      t.datetime :time
       t.string :location
-      t.string :string
       t.string :image_url
-      t.string :string
 
       t.timestamps null: false
     end
