@@ -2,24 +2,14 @@
 
 one:
   name: MyString
-  description: MyText
-  tag: MyString
-  text: MyString
-  time: MyString
-  datetime: MyString
+  desc: MyText
+  time: 2016-02-11 15:52:10
   location: MyString
-  string: MyString
-  image_url: MyString
-  string: MyString
+  image: MyText
 
 two:
   name: MyString
-  description: MyText
-  tag: MyString
-  text: MyString
-  time: MyString
-  datetime: MyString
+  desc: MyText
+  time: 2016-02-11 15:52:10
   location: MyString
-  string: MyString
-  image_url: MyString
-  string: MyString
+  image: MyText
