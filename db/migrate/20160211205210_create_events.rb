@@ -2,11 +2,10 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.string :name
-      t.text :description
-      t.string :tag
+      t.text :desc
       t.datetime :time
       t.string :location
-      t.string :image_url
+      t.text :image
 
       t.timestamps null: false
     end

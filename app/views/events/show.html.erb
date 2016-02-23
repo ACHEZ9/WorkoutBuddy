@@ -6,18 +6,8 @@
 </p>
 
 <p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
-
-<p>
-  <strong>Tag:</strong>
-  <%= @event.tag %>
-</p>
-
-<p>
-  <strong>Text:</strong>
-  <%= @event.text %>
+  <strong>Desc:</strong>
+  <%= @event.desc %>
 </p>
 
 <p>
@@ -26,28 +16,13 @@
 </p>
 
 <p>
-  <strong>Datetime:</strong>
-  <%= @event.datetime %>
-</p>
-
-<p>
   <strong>Location:</strong>
   <%= @event.location %>
 </p>
 
 <p>
-  <strong>String:</strong>
-  <%= @event.string %>
-</p>
-
-<p>
-  <strong>Image url:</strong>
-  <%= @event.image_url %>
-</p>
-
-<p>
-  <strong>String:</strong>
-  <%= @event.string %>
+  <strong>Image:</strong>
+  <%= @event.image %>
 </p>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
