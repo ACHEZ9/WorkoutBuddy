@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  email: MyString
-  bio: MyText
-  avatar: MyString
+  name: user1
+  email: user1@brandeis.edu
+  bio: user1 Bio
+  avatar: test_path_to_image
 
 two:
-  name: MyString
-  email: MyString
-  bio: MyText
-  avatar: MyString
+  name: user2
+  email: user2@brandeis.edu
+  bio: user2 Bio
+  avatar: test_path_to_image
