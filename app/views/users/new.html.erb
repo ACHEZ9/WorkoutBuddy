@@ -16,26 +16,19 @@
         </div>
       <% end %>
 
-      <div class="field">
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-      </div>
-      <div class="field">
-        <%= f.label :email %><br>
-        <%= f.email_field :email %>
-      </div>
-      <div class="field">
-        <%= f.label :password %><br>
-        <%= f.password_field :password %>
-      </div>
-      <div class="field">
-        <%= f.label :password_confirmation, "Confirm Password" %><br>
-        <%= f.password_field :password_confirmation %>
-      </div>
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
 
-      <div class="actions">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+
         <%= f.submit "Create Account", class: "btn btn-primary" %>
-      </div>
     <% end %>
 
     <%= link_to 'Back', :back %>
