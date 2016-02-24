@@ -53,18 +53,18 @@ p {
   color: #fff;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
   font-weight: bold;
 }
 
 #logo:hover {
-  color: #fff;
+  color: black;
   text-decoration: none;
 }
 
 /*NavBar*/
 .navbar {
   background-color: #428BCA;
+  padding: 5px;
   .nav li{
     a{
       color: #fff
