@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  ApplicationController.skip_before_filter :require_login
   setup do
     @user = users(:one)
   end
@@ -18,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { avatar: @user.avatar, bio: @user.bio, email: @user.email, name: @user.name }
+      post :create, user: { avatar: @user.avatar, bio: @user.bio, email: "unique@email.com", name: @user.name, password: "Test", password_confirmation: "Test"}
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -35,7 +36,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { avatar: @user.avatar, bio: @user.bio, email: @user.email, name: @user.name }
+    patch :update, id: @user, user: { avatar: @user.avatar, bio: @user.bio, email: @user.email, name: @user.name, password: "Test", password_confirmation: "Test" }
     assert_redirected_to user_path(assigns(:user))
   end
 
