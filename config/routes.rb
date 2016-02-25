@@ -3,9 +3,10 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
-  resources :activities
   resources :events
-  resources :users
+  resources :users do
+    resources :activities
+  end
 
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
