@@ -7,5 +7,10 @@ class User < ActiveRecord::Base
     uniqueness: { case_sensitive: false }
 
   has_secure_password
-  validates :password, presence: true, length: { minimum: 4}
+  validates :password, presence: true, length: { minimum: 4}, on: :create, unless: :reset_password?
+
+  def reset_password?
+    new_record? || password.present?
+  end
+
 end
