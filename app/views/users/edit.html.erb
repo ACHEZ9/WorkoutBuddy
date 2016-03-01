@@ -1,5 +1,5 @@
-<div class="">
 <h1><%= @user.name %></h1>
+<h1><%= 'Edit Profile Information' %></h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
@@ -16,7 +16,11 @@
     <% end %>
 
     <%= form_for(@user) do |f| %>
-      <%= f.label :Profile %>
+      <%= f.label :'Name: ' %>
+      <%= f.text_area :name, class: 'form-control' %>
+      <%= f.label :'Email: ' %>
+      <%= f.text_area :email, class: 'form-control' %>
+      <%= f.label :'Bio: ' %>
       <%= f.text_area :bio, class: 'form-control' %>
 
       <%= f.submit "Edit Profile", class: "btn btn-primary" %>
