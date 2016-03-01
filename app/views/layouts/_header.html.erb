@@ -4,6 +4,8 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+        <li > <%= link_to 'Users', edit_user_path(id: current_user.id) %> </li >
+        <li > <%= link_to 'Events', events_path %> </li >
           <li > <%= link_to current_user.name, edit_user_path(id: current_user.id) %> </li >
           <li > <%= link_to 'Events', events_path %> </li >
           <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
