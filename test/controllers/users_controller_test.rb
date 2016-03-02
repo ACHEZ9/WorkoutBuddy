@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path("../../test_helper", __FILE__)
 
 class UsersControllerTest < ActionController::TestCase
   ApplicationController.skip_before_filter :require_login
@@ -47,5 +47,5 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
-  
+
 end

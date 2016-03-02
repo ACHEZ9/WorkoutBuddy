@@ -1,10 +1,16 @@
 class EventsController < ApplicationController
+  skip_before_filter :require_login
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.order(:name)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @event }
+    end
   end
 
   # GET /events/1

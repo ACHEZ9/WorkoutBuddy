@@ -5,7 +5,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.order(:name)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
+    end
   end
 
   # GET /users/1
@@ -74,6 +79,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :bio, :avatar, :password, :password_confirmation)
+      params.require(:one).permit(:name, :email, :bio, :avatar, :password, :password_confirmation)
     end
 end

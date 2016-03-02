@@ -7,9 +7,15 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  extend MiniTest::Spec::DSL
+  def login_as(user)
+    session[:user_id] = users(user).id
+  end
 
-  register_spec_type self do |desc|
-    desc < ActiveRecord::Base if desc.is_a? Class
+  def logout
+    session.delete :user_id
+  end
+
+  def setup
+    login_as :one if defined? session
   end
 end
