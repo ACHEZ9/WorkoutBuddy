@@ -16,18 +16,19 @@
     <% end %>
 
     <%= form_for(@user) do |f| %>
-    <div class="form-group">
-      <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
-      <div class="col-sm-6">
-          <%= f.file_field :avatar %>
-      </div>
-    </div>
       <%= f.label :'Name: ' %>
       <%= f.text_area :name, class: 'form-control' %>
       <%= f.label :'Email: ' %>
       <%= f.text_area :email, class: 'form-control' %>
       <%= f.label :'Bio: ' %>
       <%= f.text_area :bio, class: 'form-control' %>
+
+      <div class="form-group">
+        <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+          <%= f.file_field :avatar %>
+        </div>
+      </div>
 
       <%= f.submit "Edit Profile", class: "btn btn-primary" %>
     <% end %>
