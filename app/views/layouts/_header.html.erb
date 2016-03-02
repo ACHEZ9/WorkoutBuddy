@@ -12,7 +12,6 @@
           <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
-          <li class="round-image-50"><%= image_tag("/public/images/medium/missing.png") %></li>
         <% end %>
       </ul>
     </nav>
