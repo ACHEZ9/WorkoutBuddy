@@ -25,4 +25,19 @@ class SessionsControllerTest < ActionController::TestCase
     assert_redirected_to root_url
   end
 
+  test "Should reject incorrect username " do
+    post :create, session:{email: 'fail', password: 'deis'}
+    assert_redirected_to login_path
+  end
+
+  test "Should accept username in all caps" do
+    post :create, session:{email: @user.email.upcase, password: 'deis'}
+    assert_redirected_to @user
+  end
+
+  test "Should reject password in all caps" do
+    post :create, session:{email: @user.email.upcase, password: 'deis'.upcase}
+    assert_redirected_to login_path
+  end
+
 end
