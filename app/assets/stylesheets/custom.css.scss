@@ -61,6 +61,23 @@ p {
   text-decoration: none;
 }
 
+.sidebar {
+    float:left;
+    width:20%;
+    background:#428BCA;
+    padding: 20px;
+    a.user_link {
+      color: #fff
+    }
+}
+.content {
+  float: right;
+  background:#f0f0f0;
+  padding:20px;
+  text-align: center;
+  width: 80%;
+}
+
 /*NavBar*/
 .navbar {
   background-color: #428BCA;
