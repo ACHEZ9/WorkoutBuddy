@@ -4,14 +4,16 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
-        <li > <%= link_to 'Users', edit_user_path(id: current_user.id) %> </li >
         <li > <%= link_to 'Events', events_path %> </li >
+<<<<<<< HEAD
           <li > <%= link_to current_user.name, edit_user_path(id: current_user.id) %> </li >
+=======
+          <li > <%= link_to current_user.name, user_path(id: current_user.id) %> </li >
+>>>>>>> 4ea0afc860271afa059208a9e06d74805f6b2068
           <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
           <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
-          <li > <%= link_to 'Events', events_path %> </li >
         <% end %>
       </ul>
     </nav>

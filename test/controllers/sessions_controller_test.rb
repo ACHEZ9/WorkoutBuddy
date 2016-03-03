@@ -5,11 +5,6 @@ class SessionsControllerTest < ActionController::TestCase
     @user = users(:one)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "Should reject invalid user credentials" do
     post :create, session:{email: @user.email, password: "wrong"}
     assert_redirected_to login_path

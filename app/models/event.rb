@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   has_many :users
+<<<<<<< HEAD
 
   validates :name, presence: true, length: { maximum: 50 }
 
@@ -9,4 +10,6 @@ class Event < ActiveRecord::Base
   def reset_password?
     new_record? || password.present?
   end
+=======
+>>>>>>> 4ea0afc860271afa059208a9e06d74805f6b2068
 end
