@@ -30,7 +30,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @event = current_users.event.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -41,6 +41,11 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def attend
+    @event.attendees << current_user
+    @event.save
   end
 
   # PATCH/PUT /events/1
