@@ -39,7 +39,6 @@ gem 'faker'
 gem 'rails_admin'
 
 gem 'will_paginate', '3.1.0'
-gem 'jquery-rails'
 
 
 gem 'rails_12factor', group: :production

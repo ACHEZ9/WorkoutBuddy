@@ -2,6 +2,13 @@
 
 <h1>All Events</h1>
 
+<%= form_tag events_path, :method => 'get', :id => "events_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -29,7 +36,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @events %> 
 <%= link_to 'New Event', new_event_path %>
 
 
