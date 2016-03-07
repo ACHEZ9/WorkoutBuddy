@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
-  has_many :users
+  has_many :activities
+  has_many :users, :through => :activities
 
   validates :name, presence: true, length: { maximum: 50 }
 

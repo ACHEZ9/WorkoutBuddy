@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
-  # resources :events
   resources :users do
     resources :activities
   end
@@ -14,7 +13,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :events do
-    post 'attend', on: :member
+     resources :activities
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

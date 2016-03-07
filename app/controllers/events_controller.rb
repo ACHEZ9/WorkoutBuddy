@@ -42,6 +42,12 @@ class EventsController < ApplicationController
     end
   end
 
+  def attend
+    @event.users << current_user
+    @event.save
+    # add redirect/render
+  end
+
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
