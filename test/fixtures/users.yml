@@ -4,10 +4,12 @@ one:
   name: user1
   email: user1@brandeis.edu
   bio: user1 Bio
-  avatar: test_path_to_image
+  avatar: /public/images/thumb/missing.png
+  password_digest: <%= BCrypt::Password.create('deis') %>
 
 two:
   name: user2
   email: user2@brandeis.edu
   bio: user2 Bio
-  avatar: test_path_to_image
+  avatar: /public/images/thumb/missing.png
+  password_digest: <%= BCrypt::Password.create('deis') %>

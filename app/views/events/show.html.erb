@@ -25,5 +25,6 @@
   <%= @event.image %>
 </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Attend', attend_path(@event), method: :post %>
+<%= link_to 'Edit', edit_event_path(@event) %>
 <%= link_to 'Back', events_path %>

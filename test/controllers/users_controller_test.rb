@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path("../../test_helper", __FILE__)
 
 class UsersControllerTest < ActionController::TestCase
   ApplicationController.skip_before_filter :require_login
@@ -19,7 +19,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { avatar: @user.avatar, bio: @user.bio, email: "unique@email.com", name: @user.name, password: "Test", password_confirmation: "Test"}
+      post :create, user: {bio: @user.bio, email: "unique@email.com", name: @user.name, password: "Test", password_confirmation: "Test"}
     end
 
     assert_redirected_to user_path(assigns(:user))
@@ -36,7 +36,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { avatar: @user.avatar, bio: @user.bio, email: @user.email, name: @user.name, password: "Test", password_confirmation: "Test" }
+    patch :update, id: @user, user: { bio: @user.bio, email: @user.email, name: @user.name, password: "Test", password_confirmation: "Test" }
     assert_redirected_to user_path(assigns(:user))
   end
 
@@ -47,4 +47,5 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+
 end

@@ -5,7 +5,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.order(:name)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
+    end
   end
 
   # GET /users/1
@@ -25,13 +30,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.new(params.require(:user).permit(:name, :email, :avatar, :password, :password_confirmation))
 
     respond_to do |format|
       if @user.save
-        format.html { 
+        format.html {
           log_in @user
-          redirect_to @user, notice: 'User was successfully created.' 
+          redirect_to @user, notice: 'Congratulations on joining Off the Bench!
+            Your profile information is below.'
         }
         format.json { render :show, status: :created, location: @user }
       else
@@ -46,7 +52,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Your bio was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -73,6 +79,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :bio, :avatar, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :bio, :avatar)
     end
 end

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+
+  post 'events/:id/attend' => 'events#attend', as: 'attend'
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
