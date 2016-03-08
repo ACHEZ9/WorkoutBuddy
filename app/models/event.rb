@@ -10,5 +10,15 @@ class Event < ActiveRecord::Base
   def reset_password?
     new_record? || password.present?
   end
+  has_many :users
+  scope :search, ->(search) {  where('name LIKE ?', "%#{search}%") }
+
+	# def self.search(search)
+	#   if search
+	#     where('name LIKE ?', "%#{search}%")
+	#   else
+	#     all
+	#   end
+	# end
 
 end

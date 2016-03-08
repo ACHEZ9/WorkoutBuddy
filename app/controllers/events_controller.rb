@@ -1,15 +1,16 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  helper_method :sort_column, :sort_direction
   # GET /events
   # GET /events.json
   def index
-    @events = Event.order(:name)
+    @events = Event.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
 
-    respond_to do |format|
+   respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @event }
-    end
+   end
   end
 
   # GET /events/1
@@ -29,7 +30,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = current_user.events.build(event_params)
+    # @event = current_user.events.build(event_params)
+    @event = Event.new(event_params)
 
     respond_to do |format|
       if @event.save
@@ -45,7 +47,6 @@ class EventsController < ApplicationController
   def attend
     @event.users << current_user
     @event.save
-    # add redirect/render
   end
 
   # PATCH/PUT /events/1
@@ -81,5 +82,13 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :desc, :time, :location, :image)
+    end
+
+   def sort_column
+      Event.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
