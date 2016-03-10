@@ -16,6 +16,9 @@ Rails.application.routes.draw do
      resources :activities
   end
 
+  post 'events/:id/attend' => 'events#attend', as: 'attend'
+
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
