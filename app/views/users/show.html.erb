@@ -22,13 +22,14 @@
 
   </div>
   <div class="content">
-    <h1>My Events</h1>
+    <h1>My Upcoming Events</h1>
     <ul>
       <% @user.events.order(time: :desc).each do |event| %>
+      <% if (DateTime.now < event.time) %> 
         <li> <%= "Name: #{event.name} Desc: #{event.desc} Time: #{event.time}" %> </li>
-      <% end %>
+                <td><%= link_to 'Full Details ', event %></td>
+        <% end %>
+      <% end %> 
     </ul>
   </div>
 </div>
-
-    <%= link_to 'Back', users_path %>
