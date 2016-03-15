@@ -9,11 +9,12 @@
   </p>
 <% end %>
 
-<table>
+<table class="table table-bordered table-striped"> 
   <thead>
     <tr>
+      <th> <%= sortable "time", "Day" %> </th>
       <th> <%= sortable "name" %> </th>
-      <th> <%= sortable "desc" %> </th>
+      <th> <%= sortable "desc", "Description" %> </th>
       <th> <%= sortable "time" %> </th>
       <th> <%= sortable "location" %> </th>
       <th colspan="3"></th>
@@ -23,11 +24,13 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.time.strftime("%b %d, %Y") %></td>
         <td><%= event.name %></td>
         <td><%= event.desc %></td>
-        <td><%= event.time %></td>
+        <td><%= event.time.strftime("%I:%M%p") %></td>
         <td><%= event.location %></td>
-        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
+        <td><%= link_to 'Attend', attend_path(event), method: :post, :class => 'btn btn-mini btn-danger'  %> </td> 
       </tr>
     <% end %>
   </tbody>
