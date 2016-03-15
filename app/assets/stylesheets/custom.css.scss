@@ -1,3 +1,5 @@
+$primary_color: #428BCA;
+$secondary_color: white;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -80,11 +82,11 @@ p {
 
 /*NavBar*/
 .navbar {
-  background-color: #428BCA;
+  background-color: $primary_color;
   padding: 5px;
   .nav li{
     a{
-      color: #fff
+      color: $secondary_color;
     }
     a:hover{
       color: black
