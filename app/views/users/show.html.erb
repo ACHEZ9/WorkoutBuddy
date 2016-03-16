@@ -37,7 +37,7 @@
       </thead> 
 
       <tbody> 
-      <% @user.events.order(time: :desc).each do |event| %>
+      <% @user.events.order(time: :asc).each do |event| %>
         <tr> 
           <% if (DateTime.now < event.time) %>
             <td><%= event.time.strftime("%b %d, %Y") %></td>
@@ -47,8 +47,8 @@
             <td><%= event.location %></td>
             <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
            <% end %> 
-         <% end %> 
        </tr>
+      <% end %> 
     </table>
   </div>
 </div>

@@ -92,7 +92,14 @@ p {
       color: black
     }
   }
+  .nav .dropdown li{
+    a{
+      color: black;
+    }
+  }
 }
+
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
