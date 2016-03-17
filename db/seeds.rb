@@ -1,7 +1,7 @@
 require 'faker'
 
 User.create(name: "Brad", email: "bpayne@brandeis.edu", password: '12345678')
-User.create(name: "Allan", email: "achesaro@brandeis.edu", password: '12345678')
+User.create(name: "Allan", email: "achesaro@brandeis.edu", password: 'deis')
 User.create(name: "Prayuth", email: "pnadu@brandeis.edu", password: '12345678')
 
 # Users
@@ -18,7 +18,7 @@ end
   name = Faker::Team.sport
   desc = Faker::Hacker.say_something_smart
   time = Faker::Time.between(2.days.ago, 5.days.from_now, :day)
-  location = Faker::Address.street_name
+  location = Faker::Address.zip
 
   Event.create(name: name, desc: desc, time: time, location: location)
 end

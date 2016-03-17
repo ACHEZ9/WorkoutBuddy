@@ -5,12 +5,20 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+
+    if !params[:distance].blank? && params[:distance].to_i > 1
+      puts request.location.coordinates
+      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+    else
+      @events = Event.search(params[:search])
+    end
+
+    @events = @events.order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
 
    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @event }
-   end
+    end
   end
 
   # GET /events/1

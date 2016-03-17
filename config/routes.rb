@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
+
   resources :users do
+    resources :events
+  end
+  
+  resources :users, :except => [:index] do
     resources :activities
   end
 
