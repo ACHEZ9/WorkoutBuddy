@@ -125,6 +125,13 @@ input {
   height: auto !important;
 }
 
+.inline-select { 
+  select{
+    display: inline-block;
+    width: auto;
+  }
+}
+
 .round-image-50 {
     background-color: white;
     border: 1px solid #d9d9d9;

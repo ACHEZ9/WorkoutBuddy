@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   has_many :activities
   has_many :users, :through => :activities
+  belongs_to :sport
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :location, presence: true
