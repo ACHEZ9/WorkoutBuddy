@@ -21,7 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :time %><br>
-    <%= f.datetime_select :time %>
+    <%= f.time_select :time, ampm: true, ignore_date: true %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.date_select :date %>
   </div>
   <div class="field">
     <%= f.label :location %><br>
