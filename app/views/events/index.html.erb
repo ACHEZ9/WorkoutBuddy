@@ -10,7 +10,7 @@
         <%= text_field_tag :search, params[:search] %>
       </div>
       <div class="col-md-4">
-        <%= select_tag(:distance, 
+        <%= select_tag(:distance,
           options_for_select([["Any", ""], ["1 Mile", 1], ["10 Miles", 10], ["50 Miles", 50], ["1000 Miles", 1000]])) %>
       </div>
       </div>
@@ -22,7 +22,7 @@
     </div>
     </div>
 
-<table class="table table-bordered table-striped"> 
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th> <%= sortable "time", "Day" %> </th>
@@ -30,6 +30,7 @@
       <th> <%= sortable "desc", "Description" %> </th>
       <th> <%= sortable "time" %> </th>
       <th> <%= sortable "location" %> </th>
+      <th> <%= sortable "tags" %> </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -42,11 +43,12 @@
         <td><%= event.desc %></td>
         <td><%= event.time.strftime("%I:%M%p") %></td>
         <td><%= event.location %></td>
+        <td><%= event.tag_list %></td>
         <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
-        <td><%= link_to 'Attend', attend_path(event), method: :post, :class => 'btn btn-mini btn-danger'  %> </td> 
+        <td><%= link_to 'Attend', attend_path(event), method: :post, :class => 'btn btn-mini btn-danger'  %> </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= will_paginate @events %> 
+<%= will_paginate @events %>
 <%= link_to 'New Event', new_event_path %>

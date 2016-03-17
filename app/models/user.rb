@@ -19,4 +19,8 @@ class User < ActiveRecord::Base
     new_record? || password.present?
   end
 
+  # Forgets a user.
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 end

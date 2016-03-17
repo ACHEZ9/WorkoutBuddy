@@ -25,6 +25,11 @@
   <%= @event.image %>
 </p>
 
+<p>
+  <strong>Sport:</strong>
+  <%= @event.tag_list %>
+</p>
+
 <%= link_to 'Attend', user_activities_path(current_user, event: @event.id) %> |
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

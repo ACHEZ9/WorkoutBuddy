@@ -14,6 +14,10 @@ class Event < ActiveRecord::Base
   validates :location, presence: true
   scope :search, ->(search) {  where('name LIKE ?', "%#{search}%") }
 
+  acts_as_taggable
+  acts_as_taggable_on :sports
+  # scope :by_join_date, order("created_at DESC")
+
 	# def self.search(search)
 	#   if search
 	#     where('name LIKE ?', "%#{search}%")
