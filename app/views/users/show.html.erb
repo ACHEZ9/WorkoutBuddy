@@ -37,10 +37,10 @@
       </thead>
 
       <tbody>
-      <% @user.events.order(time: :asc).each do |event| %>
+      <% @user.events.order(date: :asc, time: :asc).each do |event| %>
         <tr>
-          <% if (DateTime.now < event.time) %>
-            <td><%= event.time.strftime("%b %d, %Y") %></td>
+          <% if (Date.today <= event.date) %>
+            <td><%= event.date.strftime("%b %d, %Y") %></td>
             <td><%= event.name %></td>
             <td><%= event.desc %></td>
             <td><%= event.time.strftime("%I:%M%p") %></td>

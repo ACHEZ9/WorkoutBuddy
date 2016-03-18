@@ -1,22 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
+<div class="container" data-no-turbolink="true">
   <div class="row">
     <h1>All Events</h1>
 
     <div class="form-group">
     <%= form_tag events_path, :method => 'get', :id => "events_search" do %>
       <div class="col-md-8">
+        <label>Search:</label>
         <%= text_field_tag :search, params[:search] %>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-2">
+        <label>Sport:</label>
+        <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any") %>
+      </div>
+      <div class="col-md-2">
+        <label>Within:</label>
         <%= select_tag(:distance, 
-          options_for_select([["Any", ""], ["1 Mile", 1], ["10 Miles", 10], ["50 Miles", 50], ["1000 Miles", 1000]])) %>
+          options_for_select([["Any", ""], ["1 Mile", 1], ["10 Miles", 10], ["50 Miles", 50], ["1000 Miles", 1000]], @distance_default)) %>
       </div>
       </div>
       <div class="form-group">
         <div class="col-md-6 col-md-offset-3">
-        <%= submit_tag "Search", :name => nil %>
+        <%= submit_tag "Search" %>
       </div>
     <% end %>
     </div>
@@ -25,6 +31,7 @@
 <table class="table table-bordered table-striped"> 
   <thead>
     <tr>
+      <th> <%= sortable "sports.name", "Sport" %> </th>
       <th> <%= sortable "date", "Day" %> </th>
       <th> <%= sortable "name" %> </th>
       <th> <%= sortable "desc", "Description" %> </th>
@@ -37,6 +44,7 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.sport.name %></td>
         <td><%= event.date.strftime("%b %d, %Y") %></td>
         <td><%= event.name %></td>
         <td><%= event.desc %></td>

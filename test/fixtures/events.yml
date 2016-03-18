@@ -7,6 +7,7 @@ one:
   date: 2016-02-11 15:52:10
   location: MyString
   image: MyText
+  sport: one
 
 two:
   name: MyString
@@ -15,3 +16,4 @@ two:
   date: 2016-02-11 15:52:10
   location: MyString
   image: MyText
+  sport: two

@@ -31,11 +31,14 @@ ActiveRecord::Schema.define(version: 20160317194535) do
     t.integer  "dow"
     t.string   "location"
     t.text     "image"
+    t.integer  "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float    "latitude"
     t.float    "longitude"
   end
+
+  add_index "events", ["sport_id"], name: "index_events_on_sport_id"
 
   create_table "sports", force: :cascade do |t|
     t.string   "name"
