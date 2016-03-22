@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   scope :search, ->(search) {  where('events.name LIKE ?', "%#{search}%") }
 
   geocoded_by :location
-  after_validation :geocode, if: ->(obj){ obj.location.present? and obj.location_changed? }
+  after_validation :geocode, if: ->(obj){ !Rails.env.test? and obj.location.present? and obj.location_changed? }
 
   def reset_password?
     new_record? || password.present?

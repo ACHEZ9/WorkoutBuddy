@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   def index
     @distance_default = ""
     @sport_default = ""
-    if !params[:distance].blank? && params[:distance].to_i > 1
+    if !params[:distance].blank? && params[:distance].to_i > 0
       puts request.location.coordinates
       @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
       @distance_default = params[:distance]
