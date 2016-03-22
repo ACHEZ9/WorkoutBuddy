@@ -46,6 +46,7 @@
             <td><%= event.time.strftime("%I:%M%p") %></td>
             <td><%= event.location %></td>
             <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
+            <td><%= link_to 'Unattend', unattend_path(event), method: :post, :class => 'btn btn-mini btn-danger' %> </td>
            <% end %>
        </tr>
       <% end %>

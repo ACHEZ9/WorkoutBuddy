@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :attend, :unattend]
 
   helper_method :sort_column, :sort_direction
   # GET /events
@@ -94,9 +94,13 @@ class EventsController < ApplicationController
 
   #PUT /events/1/attend
   def attend
-    set_event
     current_user.events << @event
     redirect_to @event, notice: 'You joined this event!'
+  end
+
+  def unattend
+    current_user.events.destroy(@event)
+    redirect_to current_user
   end
 
   private

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   post 'events/:id/attend' => 'events#attend', as: 'attend'
+  post 'events/:id/unattend' => 'events#unattend', as: 'unattend'
 
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
