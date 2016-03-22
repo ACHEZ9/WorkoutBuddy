@@ -20,12 +20,12 @@ end
 
 # Events
 20.times do
-  name = Faker::StarWars.quote
+  sport = Sport.limit(1).order("RANDOM()").first
+  name = "#{sport[:name]} - #{Faker::Team.name}"
   desc = Faker::Hacker.say_something_smart
   time = Faker::Time.between(1.days.ago, Time.now, :day)
   date = Faker::Date.between(2.days.ago, 5.days.from_now)
   location = Faker::Address.zip
-  sport = Sport.limit(1).order("RANDOM()").first
 
   Event.create(name: name, desc: desc, time: time, date: date, sport_id: sport[:id], location: location)
 end
