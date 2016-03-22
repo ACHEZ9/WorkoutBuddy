@@ -4,10 +4,23 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
-        <li > <%= link_to 'Events', events_path %> </li >
           <li > <%= link_to current_user.name, user_path(id: current_user.id) %> </li >
-          <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
-          <li class="round-image-50"><%= image_tag(current_user.avatar.url(:thumb)) %></li>
+          <li > <%= link_to 'Events', events_path%> </li >
+          <li><a href="#">Notifications<span class="badge"></span></a></li>
+          <li class="dropdown">
+            <a href='#' class="dropdown-toggle" data-toggle="dropdown">
+              Options<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+              <li><%= link_to "Discovery Settings", "#" %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Create Event", new_event_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
+            </ul>
+          </li>
+          <li><%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %></li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>

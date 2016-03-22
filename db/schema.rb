@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302000546) do
+ActiveRecord::Schema.define(version: 20160317194535) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,12 +26,37 @@ ActiveRecord::Schema.define(version: 20160302000546) do
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.text     "desc"
-    t.datetime "time"
+    t.date     "date"
+    t.time     "time"
+    t.integer  "dow"
     t.string   "location"
     t.text     "image"
+    t.integer  "sport_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
+  end
+
+  add_index "events", ["sport_id"], name: "index_events_on_sport_id"
+
+  create_table "sports", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_sports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "sport_id"
+    t.integer  "skill"
+    t.integer  "games"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_sports", ["sport_id"], name: "index_user_sports_on_sport_id"
+  add_index "user_sports", ["user_id"], name: "index_user_sports_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

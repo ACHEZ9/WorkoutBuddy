@@ -1,5 +1,13 @@
+$primary_color: #428BCA;
+$secondary_color: white;
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
 
 body {
   padding-top: 60px;
@@ -80,17 +88,23 @@ p {
 
 /*NavBar*/
 .navbar {
-  background-color: #428BCA;
+  background-color: $primary_color;
   padding: 5px;
   .nav li{
     a{
-      color: #fff
+      color: $secondary_color;
     }
     a:hover{
       color: black
     }
   }
+  .nav .dropdown li{
+    a{
+      color: black;
+    }
+  }
 }
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -111,6 +125,13 @@ input {
   height: auto !important;
 }
 
+.inline-select { 
+  select{
+    display: inline-block;
+    width: auto;
+  }
+}
+
 .round-image-50 {
     background-color: white;
     border: 1px solid #d9d9d9;
@@ -122,4 +143,27 @@ input {
     overflow: hidden;
     text-align: center;
     img { width: 100% }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* misc */
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
 }

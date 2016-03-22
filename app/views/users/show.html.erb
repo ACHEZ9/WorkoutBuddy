@@ -2,12 +2,12 @@
 <div>
   <div class="sidebar">
     <h1>
-      <%= image_tag(current_user.avatar.url(:medium)) %>
+      <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
       <%= @user.name %>
     </h1>
 
-    <strong>Name:</strong> 
-    <%= @user.name %> 
+    <strong>Name:</strong>
+    <%= @user.name %>
     </br>
     <strong>Email:</strong>
     <%= @user.email %>
@@ -22,13 +22,38 @@
 
   </div>
   <div class="content">
-    <h1>My Events</h1>
-    <ul>
-      <% @user.events.order(time: :desc).each do |event| %>
-        <li> <%= "Name: #{event.name} Desc: #{event.desc} Time: #{event.time}" %> </li>
+    <h1>My Upcoming Events</h1>
+      <table class="table table-bordered table-striped">
+
+      <thead>
+        <tr>
+          <th> <%= "Date" %> </th>
+          <th> <%= "Name" %> </th>
+          <th> <%= "Descritpion" %> </th>
+          <th> <%= "Time" %> </th>
+          <th> <%= "Location" %> </th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @user.events.order(date: :asc, time: :asc).each do |event| %>
+        <tr>
+          <% if (Date.today <= event.date) %>
+            <td><%= event.date.strftime("%b %d, %Y") %></td>
+            <td><%= event.name %></td>
+            <td><%= event.desc %></td>
+            <td><%= event.time.strftime("%I:%M%p") %></td>
+            <td><%= event.location %></td>
+            <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
+            <td><%= link_to 'Unattend', unattend_path(event), method: :post, :class => 'btn btn-mini btn-danger' %> </td>
+           <% end %>
+       </tr>
       <% end %>
-    </ul>
+    </table>
   </div>
 </div>
 
-    <%= link_to 'Back', users_path %>
+<%= link_to "Create Event", new_event_path(@event) %> |
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  sport_id: 
+  skill: 1
+  games: 1
+
+two:
+  user_id: 
+  sport_id: 
+  skill: 1
+  games: 1

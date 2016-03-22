@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'pry'
 gem 'rails', '4.2.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -37,7 +38,7 @@ gem 'bootstrap-sass', '3.2.0.0'
 gem 'better_errors'
 gem 'faker'
 gem 'rails_admin'
-
+gem 'geocoder'
 gem 'will_paginate', '3.1.0'
 
 
