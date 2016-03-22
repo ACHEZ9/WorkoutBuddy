@@ -18,6 +18,8 @@ end
   Sport.create(name: name)
 end
 
+#Boston zipcodes
+@zipcodes = ["02453", "02108", "02201", "02284", "02113", "02114"]
 # Events
 20.times do
   sport = Sport.limit(1).order("RANDOM()").first
@@ -25,7 +27,7 @@ end
   desc = Faker::Hacker.say_something_smart
   time = Faker::Time.between(1.days.ago, Time.now, :day)
   date = Faker::Date.between(2.days.ago, 5.days.from_now)
-  location = Faker::Address.zip
+  location = @zipcodes.sample
 
   Event.create(name: name, desc: desc, time: time, date: date, sport_id: sport[:id], location: location)
 end
