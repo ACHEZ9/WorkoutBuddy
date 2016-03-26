@@ -9,7 +9,8 @@ one:
   friday: false
   saturday: false
   sunday: false
-  time: 2016-03-24 15:55:38
+  start_time: 2016-03-24 15:55:38
+  end_time: 2016-03-24 17:55:38
 
 two:
   sport_id: 
@@ -20,4 +21,6 @@ two:
   friday: false
   saturday: false
   sunday: false
-  time: 2016-03-24 15:55:38
+  start_time: 2016-03-24 15:55:38
+  end_time: 2016-03-24 17:55:38
+
