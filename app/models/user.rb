@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_many :activities
   has_many :events, :through => :activities
+  has_many :userSports
+  has_many :sports, :through => :userSports
+  has_many :userPrefs
 
   before_save{ self.email = email.downcase }
 

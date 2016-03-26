@@ -13,8 +13,9 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
+              <li><%= link_to "Discovery Settings", "#" %></li>
+              <li role="separator" class="divider"></li>
               <li><%= link_to "Create Event", new_event_path %></li>
-              <li><%= link_to "Settings", "#" %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Log Out", logout_path, method: "delete" %></li>
             </ul>

@@ -1,16 +1,27 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :attend, :unattend]
 
   helper_method :sort_column, :sort_direction
   # GET /events
   # GET /events.json
   def index
-
-    if !params[:distance].blank? && params[:distance].to_i > 1
+    @distance_default = ""
+    @sport_default = ""
+    if !params[:distance].blank? && params[:distance].to_i > 0
       puts request.location.coordinates
       @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+      @distance_default = params[:distance]
     else
       @events = Event.search(params[:search])
+    end
+
+    if !params[:sport_id].blank?
+      @events = @events.where(sport_id: params[:sport_id])
+      @sport_default = params[:sport_id]
+    end
+
+    if sort_column == 'sports.name'
+      @events = @events.includes(:sport)
     end
 
     @events = @events.order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
@@ -83,9 +94,13 @@ class EventsController < ApplicationController
 
   #PUT /events/1/attend
   def attend
-    set_event
     current_user.events << @event
     redirect_to @event, notice: 'You joined this event!'
+  end
+
+  def unattend
+    current_user.events.destroy(@event)
+    redirect_to current_user
   end
 
   private
@@ -96,11 +111,11 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :desc, :time, :location, :image)
+      params.require(:event).permit(:name, :desc, :time, :date, :location, :image, :sport_id)
     end
 
    def sort_column
-      Event.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      Event.column_names.include?(params[:sort]) || params[:sort] == 'sports.name' ? params[:sort] : "name"
     end
 
     def sort_direction
