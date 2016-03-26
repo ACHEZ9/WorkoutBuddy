@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   post 'events/:id/attend' => 'events#attend', as: 'attend'
   post 'events/:id/unattend' => 'events#unattend', as: 'unattend'
 
+  get '/users/:id/preferences' => 'users#user_prefs', as:'user_prefs'
+  post '/users/:id/preferences' => 'users#user_prefs_create'
+  get '/users/:id/preferences/new' => 'users#user_prefs_new', as:'user_prefs_new'
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

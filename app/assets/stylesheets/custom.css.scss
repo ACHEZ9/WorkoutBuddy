@@ -78,6 +78,7 @@ p {
       color: #fff
     }
 }
+
 .content {
   float: right;
   background:#f0f0f0;
@@ -116,7 +117,6 @@ p {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -145,7 +145,7 @@ input {
     img { width: 100% }
 }
 
-.checkbox {
+.login-checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
   span {
