@@ -1,58 +1,189 @@
 <% provide(:title, @user.name) %>
-<div>
-  <div class="sidebar">
-    <h1>
-      <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
-      <%= @user.name %>
-    </h1>
 
-    <strong>Name:</strong>
-    <%= @user.name %>
-    </br>
-    <strong>Email:</strong>
-    <%= @user.email %>
-    </br>
-    <strong>Bio:</strong>
-    <%= @user.bio %>
-    </br>
-
-    <div class="center">
-      <%= link_to 'Edit Profile', edit_user_path(@user), class: "user_link" %>
+<hr>
+<div class="container">
+	<div class="row">
+  		<div class="col-sm-10"><h1><%= @user.name %></h1></div>
+      <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-250") %>
     </div>
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
 
-  </div>
-  <div class="content">
-    <h1>My Upcoming Events</h1>
-      <table class="table table-bordered table-striped">
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Profile</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Name:</strong></span> <%= @user.name %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Email:</strong></span> <%= @user.email %></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Bio:</strong></span> <%= @user.bio %></li>
 
-      <thead>
-        <tr>
-          <th> <%= "Date" %> </th>
-          <th> <%= "Name" %> </th>
-          <th> <%= "Descritpion" %> </th>
-          <th> <%= "Time" %> </th>
-          <th> <%= "Location" %> </th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
+          </ul>
 
-      <tbody>
-      <% @user.events.order(time: :asc).each do |event| %>
-        <tr>
-          <% if (DateTime.now < event.time) %>
-            <td><%= event.time.strftime("%b %d, %Y") %></td>
-            <td><%= event.name %></td>
-            <td><%= event.desc %></td>
-            <td><%= event.time.strftime("%I:%M%p") %></td>
-            <td><%= event.location %></td>
-            <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
-           <% end %>
-       </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Sports <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body"><a href="http://bootply.com">bootply.com</a></div>
+          </div>
 
-<%= link_to "Create Event", new_event_path(@event) %> |
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+          </ul>
+          
+          <ul class="list-group">
+            <li class="list-group-item text-muted">Options <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong><%= link_to "Create Event", new_event_path(@event) %></strong></span></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong><%= link_to 'Edit', edit_user_path(@user) %></strong></span></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong><%= link_to 'Back', users_path %></span></strong></li>
+          </ul>
+
+        </div><!--/col-3-->
+    	<div class="col-sm-9">
+
+          <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#home" data-toggle="tab">Events</a></li>
+            <li><a href="#messages" data-toggle="tab">Messages</a></li>
+            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th> <%= "Date" %> </th>
+                      <th> <%= "Name" %> </th>
+                      <th> <%= "Sport" %> </th>
+                      <th> <%= "Time" %> </th>
+                      <th> <%= "Location" %> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <% @user.events.order(time: :asc).each do |event| %>
+                      <tr>
+                        <% if (DateTime.now < event.time) %>
+                          <td><%= event.time.strftime("%b %d, %Y") %></td>
+                          <td><%= event.name %></td>
+                          <td><%= event.desc %></td>
+                          <td><%= event.time.strftime("%I:%M%p") %></td>
+                          <td><%= event.location %></td>
+                          <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
+                         <% end %>
+                     </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+                <hr>
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-4 text-center">
+                  	<ul class="pagination" id="myPager"></ul>
+                  </div>
+                </div>
+              </div><!--/table-resp-->
+
+              <hr>
+
+              <h4>Recent Activity</h4>
+
+              <div class="table-responsive">
+                <table class="table table-hover">
+
+                  <tbody>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> Today, 1:00 - Jeff Manzi liked your post.</td>
+                    </tr>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> Today, 12:23 - Mark Friendo liked and shared your post.</td>
+                    </tr>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> Today, 12:20 - You posted a new blog entry title "Why social media is".</td>
+                    </tr>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> Yesterday - Karen P. liked your post.</td>
+                    </tr>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> 2 Days Ago - Philip W. liked your post.</td>
+                    </tr>
+                    <tr>
+                      <td><i class="pull-right fa fa-edit"></i> 2 Days Ago - Jeff Manzi liked your post.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="messages">
+
+               <h2></h2>
+
+               <ul class="list-group">
+                  <li class="list-group-item text-muted">Inbox</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Here is your a link to the latest summary report from the..</a> 2.13.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Hi Joe, There has been a request on your account since that was..</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Nullam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Thllam sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Wesm sapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">For therepien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Also we, havesapien massaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+                  <li class="list-group-item text-right"><a href="#" class="pull-left">Swedish chef is assaortor. A lobortis vitae, condimentum justo...</a> 2.11.2014</li>
+
+                </ul>
+
+             </div><!--/tab-pane-->
+             <div class="tab-pane" id="settings">
+
+                    <%= form_for(@user) do |f| %>
+                      <% if @user.errors.any? %>
+                        <div id="error_explanation">
+                          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being created:</h2>
+
+                          <ul>
+                          <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                          </ul>
+                        </div>
+                      <% end %>
+
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                            <%= f.label :name %>
+                            <%= f.text_field :name, class: 'form-control' %>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+
+                          <div class="col-xs-6">
+                            <<%= f.label :email %>
+                            <%= f.email_field :email, class: 'form-control' %>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-xs-6">
+                          <%= f.label :avatar, class: 'form-control'  %>
+                          <%= f.file_field :avatar %>
+                        </div>
+                      </div>
+
+
+                      <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                            </div>
+                      </div>
+                        <% end %>
+
+              </div>
+
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
