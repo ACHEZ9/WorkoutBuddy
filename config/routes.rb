@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   post 'events/:id/unattend' => 'events#unattend', as: 'unattend'
 
 
+  get 'reccomend' => 'user#reccomendations'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # The priority is based upon order of creation: first created -> highest priority.
