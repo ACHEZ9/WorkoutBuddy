@@ -84,6 +84,19 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
+  def user_prefs_new
+    @user_pref = UserPref.new
+  end
+
+  def user_prefs_create
+    @user_pref = UserPref.new(user_pref_params)
+    if @user_pref.save
+      redirect_to current_user, notice: "Notification event added!"
+    else
+      render :user_prefs_new
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -93,6 +106,11 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :bio, :avatar)
+    end
+
+    def user_pref_params
+      puts "*************#{params}***************"
+      params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
     
 end
