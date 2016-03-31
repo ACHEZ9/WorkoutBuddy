@@ -1,0 +1,21 @@
+<h1>Notifications Set</h1>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Sport</th>
+      <th>Days</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.userPrefs.each do |pref| %>
+      <tr>
+        <td><%= pref.sport.name %></td>
+        <td><%= pref.days %> </td>
+        <td><%= pref.start_time.strftime("%I:%M%p") %></td>
+        <td><%= pref.end_time.strftime("%I:%M%p") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

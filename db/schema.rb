@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317194535) do
+ActiveRecord::Schema.define(version: 20160324195538) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "user_id"
@@ -45,6 +45,25 @@ ActiveRecord::Schema.define(version: 20160317194535) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "user_prefs", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "sport_id"
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
+    t.boolean  "sunday"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_prefs", ["sport_id"], name: "index_user_prefs_on_sport_id"
+  add_index "user_prefs", ["user_id"], name: "index_user_prefs_on_user_id"
 
   create_table "user_sports", force: :cascade do |t|
     t.integer  "user_id"
