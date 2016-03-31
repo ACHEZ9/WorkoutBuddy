@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get '/users/:id/preferences/new' => 'users#user_prefs_new', as:'user_prefs_new'
 
 
+  get 'reccomend' => 'user#reccomendations'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # The priority is based upon order of creation: first created -> highest priority.

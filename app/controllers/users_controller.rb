@@ -13,6 +13,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def reccomendations
+    @users = User.order(:name)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @users }
+    end
+  end 
+
   # GET /users/1
   # GET /users/1.json
   def show

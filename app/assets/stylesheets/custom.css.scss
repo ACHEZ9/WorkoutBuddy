@@ -1,4 +1,4 @@
-$primary_color: #428BCA;
+$primary_color: #C21515;
 $secondary_color: white;
 
 @import "bootstrap-sprockets";
@@ -126,7 +126,7 @@ input {
   height: auto !important;
 }
 
-.inline-select { 
+.inline-select {
   select{
     display: inline-block;
     width: auto;
