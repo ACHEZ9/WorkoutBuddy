@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get '/users/:id/preferences/new' => 'users#user_prefs_new', as:'user_prefs_new'
 
 
-  get 'reccomend' => 'user#reccomendations'
+  get 'recommendations' => 'users#recommendations'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
