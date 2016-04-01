@@ -11,7 +11,7 @@
   <tbody>
     <% @user.userPrefs.each do |pref| %>
       <tr>
-        <td><%= pref.sport.name %></td>
+        <td><%= pref.display_sport %></td>
         <td><%= pref.days %> </td>
         <td><%= pref.start_time.strftime("%I:%M%p") %></td>
         <td><%= pref.end_time.strftime("%I:%M%p") %></td>

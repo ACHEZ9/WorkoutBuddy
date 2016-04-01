@@ -14,4 +14,12 @@ class UserPref < ActiveRecord::Base
     @days.strip!
   end
 
+  def display_sport
+    if sport.nil?
+      "Any"
+    else
+      sport.name
+    end
+  end
+
 end
