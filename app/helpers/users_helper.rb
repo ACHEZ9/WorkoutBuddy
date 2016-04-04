@@ -1,11 +1,13 @@
 module UsersHelper
 
   def notification_count 
-    if logged_in?
+    if logged_in? && !Rails.env.test?
       @count ||= $redis.llen("notifications:user:#{current_user.id}")
       @count = "" if @count == 0
-      
+
       return @count
+    else
+      return ""
     end
   end
 
