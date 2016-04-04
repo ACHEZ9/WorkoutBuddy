@@ -3,5 +3,6 @@ if Rails.env.production?
       $redis = Redis.new(:url => ENV["REDISCLOUD_URL"])
   end
 elsif Rails.env.development?
-  $redis = Redis.new(:url => "redis://:cosi166b@pub-redis-18862.us-east-1-2.1.ec2.garantiadata.com:18862")
+  #Set environment variable or replace with the url of your redis service
+  $redis = Redis.new(:url => ENV["REDISCLOUD_URL"])
 end

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :events
+    collection do
+      get 'notifications'
+      delete 'notification' => 'users#delete_notification', as: 'delete_notification'
+    end
   end
   
   resources :users, :except => [:index] do
