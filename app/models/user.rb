@@ -22,4 +22,13 @@ class User < ActiveRecord::Base
     new_record? || password.present?
   end
 
+  def get_notifications
+    event_ids = $redis.lrange("notifications:user:#{self.id}", 0, -1)
+    Event.find(event_ids)
+  end
+
+  def delete_notification(value)
+    $redis.lrem("notifications:user:#{self.id}", 1, value)
+  end
+
 end

@@ -112,6 +112,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def notifications
+    @notifications = current_user.get_notifications
+  end
+
+  def delete_notification
+    current_user.delete_notification(params[:id])
+    clear_notification_count(current_user.id)
+    
+    respond_to do |format|
+      format.html {redirect_to notifications_users_path}
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -124,7 +138,6 @@ class UsersController < ApplicationController
     end
 
     def user_pref_params
-      puts "*************#{params}***************"
       params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
     

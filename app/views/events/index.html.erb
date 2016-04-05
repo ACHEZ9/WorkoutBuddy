@@ -19,12 +19,13 @@
         <%= select_tag(:distance, 
           options_for_select([["Any", ""], ["1 Mile", "1"], ["10 Miles", "10"], ["50 Miles", "50"], ["1000 Miles", "1000"]], @distance_default), class: 'form-control') %>
       </div>
-        <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-6 col-md-offset-3">
         <%= submit_tag "Search", class: 'form-control' %>
       </div>
     <% end %>
     </div>
-    </div>
+  </div>
+</div>
 
 <table class="table table-bordered table-striped"> 
   <thead>

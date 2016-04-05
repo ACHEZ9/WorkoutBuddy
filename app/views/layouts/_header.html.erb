@@ -4,9 +4,10 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+          <div id="user_id" style="display:none"><%=current_user.id%></div>
           <li > <%= link_to current_user.name, user_path(id: current_user.id) %> </li >
           <li > <%= link_to 'Events', events_path%> </li >
-          <li><a href="#">Notifications<span class="badge"></span></a></li>
+          <li><a href="<%=notifications_users_path%>">Notifications<span class="badge" id="notification_badge"><%= notification_count %></span></a></li>
           <li class="dropdown">
             <a href='#' class="dropdown-toggle" data-toggle="dropdown">
               Options<b class="caret"></b>
