@@ -8,7 +8,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="user_id" style="display:none"><%=current_user.id%></div>
   <% flash.each do |message_type, message| %>
     <div class="alert alert-<%= message_type %> center"><%= message %></div>
   <% end %>

@@ -6,6 +6,7 @@ class Event < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 }
   validates :location, presence: true
   validates :date, :time, presence: true
+  validates :sport, presence: true
 
   before_save :get_dow
   after_create :send_notifications
