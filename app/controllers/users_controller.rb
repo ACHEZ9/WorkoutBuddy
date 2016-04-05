@@ -13,12 +13,27 @@ class UsersController < ApplicationController
     end
   end
 
-  def reccomendations
-    @users = User.order(:name)
+  def recommendations
+    @distance_default = ""
+    @sport_default = ""
+    if !params[:distance].blank? && params[:distance].to_i > 0
+      puts request.location.coordinates
+      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+      @distance_default = params[:distance]
+    else
+      @events = Event.search(params[:search])
+    end
 
-    respond_to do |format|
+    if !params[:sport_id].blank?
+      @events = @events.where(sport_id: params[:sport_id])
+      @sport_default = params[:sport_id]
+    end
+
+    @events = @events.paginate(:per_page => 10, :page => params[:page])
+
+   respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @event }
     end
   end 
 

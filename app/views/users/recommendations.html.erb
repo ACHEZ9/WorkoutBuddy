@@ -1,0 +1,8 @@
+<h1>Reccomendations</h1>
+
+<h2> Workin' on it - Brad </h2> 
+
+<%= @current_user.events.each do |e| %>
+  <%= e.name %> 
+<% end %>  
+
