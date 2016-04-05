@@ -21,6 +21,7 @@ module SessionsHelper
   end
 
   def log_out
+    clear_notification_count(current_user.id)
     forget(current_user)
     session.delete(:user_id)
     @current_user = nil

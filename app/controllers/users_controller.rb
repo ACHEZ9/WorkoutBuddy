@@ -13,12 +13,27 @@ class UsersController < ApplicationController
     end
   end
 
-  def reccomendations
-    @users = User.order(:name)
+  def recommendations
+    @distance_default = ""
+    @sport_default = ""
+    if !params[:distance].blank? && params[:distance].to_i > 0
+      puts request.location.coordinates
+      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+      @distance_default = params[:distance]
+    else
+      @events = Event.search(params[:search])
+    end
 
-    respond_to do |format|
+    if !params[:sport_id].blank?
+      @events = @events.where(sport_id: params[:sport_id])
+      @sport_default = params[:sport_id]
+    end
+
+    @events = @events.paginate(:per_page => 10, :page => params[:page])
+
+   respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @event }
     end
   end 
 
@@ -97,6 +112,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def notifications
+    @notifications = current_user.get_notifications
+  end
+
+  def delete_notification
+    current_user.delete_notification(params[:id])
+    clear_notification_count(current_user.id)
+    
+    respond_to do |format|
+      format.html {redirect_to notifications_users_path}
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -109,7 +138,6 @@ class UsersController < ApplicationController
     end
 
     def user_pref_params
-      puts "*************#{params}***************"
       params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
     
