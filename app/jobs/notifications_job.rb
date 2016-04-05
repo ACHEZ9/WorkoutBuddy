@@ -1,5 +1,6 @@
 class NotificationsJob 
   include SuckerPunch::Job
+  include UsersHelper
   
   def perform(event)
     ActiveRecord::Base.connection_pool.with_connection do
@@ -7,9 +8,9 @@ class NotificationsJob
       @preferences.each do |pref|
         user = pref.user
         $redis.lpush("notifications:user:#{user.id}", event.id)
-        # $redis.llen("notifications:user:#{user.id}")
-        # $redis.lrem("notifications:user:#{user.id}", 1, event.id)
-        # $redis.lrange("notifications:user:#{user.id}", 0, -1)
+        clear_notification_count(user.id)
+        #Send a push that a new event was created
+        Pusher.trigger('notifications_channel', 'notification_event_' + user.id.to_s, {event_id: event.id})
       end
     end
   end

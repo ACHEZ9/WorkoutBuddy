@@ -103,7 +103,7 @@ class UsersController < ApplicationController
 
   def delete_notification
     current_user.delete_notification(params[:id])
-    clear_notification_count
+    clear_notification_count(current_user.id)
     
     respond_to do |format|
       format.html {redirect_to notifications_users_path}
