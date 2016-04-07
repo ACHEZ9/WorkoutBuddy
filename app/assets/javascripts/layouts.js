@@ -10,7 +10,6 @@ $(document).ready(function(){
     } else {
       count = parseInt(count) + 1;
     }
-    alert(count)
     document.getElementById('notification_badge').innerHTML = count;
   });
 });
