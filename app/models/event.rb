@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
   validates :location, presence: true
   validates :date, :time, presence: true
   validates :sport, presence: true
+  validate :event_in_past
 
   before_save :get_dow
   after_create :send_notifications
@@ -29,6 +30,12 @@ class Event < ActiveRecord::Base
 
   def send_notifications
     NotificationsJob.perform_async(self)
+  end
+
+  def event_in_past
+    if !self.date.blank? && self.date < Date.today
+      errors.add(:date, "can't be in the past")
+    end
   end
 
 end
