@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         # add ability to make a method call more selective 
 
       end  
-    end 
+    end
   end 
 
   # GET /users/1
