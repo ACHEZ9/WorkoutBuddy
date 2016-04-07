@@ -4,8 +4,6 @@
     <tr>
       <th>Sport</th>
       <th>Days</th>
-      <th>Start Time</th>
-      <th>End Time</th>
     </tr>
   </thead>
   <tbody>
@@ -13,12 +11,7 @@
       <tr>
         <td><%= pref.display_sport %></td>
         <td><%= pref.days %> </td>
-        <td><%= pref.start_time.strftime("%I:%M%p") %></td>
-        <td><%= pref.end_time.strftime("%I:%M%p") %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<div class="center">
-  <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
-</div>

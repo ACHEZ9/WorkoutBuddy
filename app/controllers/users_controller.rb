@@ -14,27 +14,21 @@ class UsersController < ApplicationController
   end
 
   def recommendations
-    @distance_default = ""
-    @sport_default = ""
-    if !params[:distance].blank? && params[:distance].to_i > 0
-      puts request.location.coordinates
-      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
-      @distance_default = params[:distance]
-    else
-      @events = Event.search(params[:search])
-    end
+    # move this to either the model or jobs 
+    @events = current_user.events
+    @reccos = nil
+    puts "LOOK HERE"
+    puts @events
+    @e_others = Event.all
+    @e_others.each do|e|
+      unless @events.include? e
+        # look for if there's a time confict 
+        # check location 
+        # create sub methods for each search factor 
+        # add ability to make a method call more selective 
 
-    if !params[:sport_id].blank?
-      @events = @events.where(sport_id: params[:sport_id])
-      @sport_default = params[:sport_id]
-    end
-
-    @events = @events.paginate(:per_page => 10, :page => params[:page])
-
-   respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @event }
-    end
+      end  
+    end 
   end 
 
   # GET /users/1
