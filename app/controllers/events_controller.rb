@@ -8,10 +8,10 @@ class EventsController < ApplicationController
     @distance_default = ""
     @sport_default = ""
     if !params[:distance].blank? && params[:distance].to_i > 0
-      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+      @events = Event.near("Boston, MA", params[:distance].to_i)
       @distance_default = params[:distance]
     else
-      @events = Event.search(params[:search])
+      @events = Event.all
     end
 
     if !params[:sport_id].blank?
@@ -53,7 +53,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        current_user.attend_event(@event)
+        if logged_in?
+          current_user.attend_event(@event)
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -111,11 +113,11 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :desc, :time, :date, :location, :image, :sport_id)
+      params.require(:event).permit(:desc, :time, :date, :location, :sport_id)
     end
 
    def sort_column
-      Event.column_names.include?(params[:sort]) || params[:sort] == 'sports.name' ? params[:sort] : "name"
+      Event.column_names.include?(params[:sort]) || params[:sort] == 'sports.name' ? params[:sort] : "date"
     end
 
     def sort_direction

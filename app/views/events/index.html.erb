@@ -6,10 +6,6 @@
 
     <div class="form-group">
     <%= form_tag events_path, :method => 'get', :id => "events_search" do %>
-      <div class="col-md-8">
-        <label>Search:</label>
-        <%= text_field_tag :search, params[:search], class: 'form-control' %>
-      </div>
       <div class="col-md-2">
         <label>Sport:</label>
         <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any", class: 'form-control') %>
@@ -32,7 +28,6 @@
     <tr>
       <th> <%= sortable "sports.name", "Sport" %> </th>
       <th> <%= sortable "date", "Day" %> </th>
-      <th> <%= sortable "name" %> </th>
       <th> <%= sortable "desc", "Description" %> </th>
       <th> <%= sortable "time" %> </th>
       <th> <%= sortable "location" %> </th>
@@ -45,7 +40,6 @@
       <tr>
         <td><%= event.sport.name %></td>
         <td><%= event.date.strftime("%b %d, %Y") %></td>
-        <td><%= event.name %></td>
         <td><%= event.desc %></td>
         <td><%= event.time.strftime("%I:%M%p") %></td>
         <td><%= event.location %></td>

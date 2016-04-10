@@ -33,7 +33,6 @@
       <thead>
         <tr>
           <th> <%= "Date" %> </th>
-          <th> <%= "Name" %> </th>
           <th> <%= "Description" %> </th>
           <th> <%= "Time" %> </th>
           <th> <%= "Location" %> </th>
@@ -46,7 +45,6 @@
         <tr>
           <% if (Date.today <= event.date) %>
             <td><%= event.date.strftime("%b %d, %Y") %></td>
-            <td><%= event.name %></td>
             <td><%= event.desc %></td>
             <td><%= event.time.strftime("%I:%M%p") %></td>
             <td><%= event.location %></td>
