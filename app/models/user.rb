@@ -33,8 +33,10 @@ class User < ActiveRecord::Base
 
   def attend_event(event)
     self.events << event
-    $redis.lrem("notifications:user:#{self.id}", 1, event.id)
-    Rails.cache.delete("/notifications/#{self.id}")
+    if !Rails.env.test?
+      $redis.lrem("notifications:user:#{self.id}", 1, event.id)
+      Rails.cache.delete("/notifications/#{self.id}")
+    end
   end
 
   def unattend_event(event)
