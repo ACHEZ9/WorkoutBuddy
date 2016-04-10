@@ -31,4 +31,11 @@ class User < ActiveRecord::Base
     $redis.lrem("notifications:user:#{self.id}", 1, value)
   end
 
+  def attend_event(event)
+    self.events << event
+  end
+
+  def unattend_event(event)
+    self.events.destroy(event)
+  end
 end

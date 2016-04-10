@@ -53,6 +53,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        current_user.attend_event(@event)
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -62,10 +63,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def attend
-    @event.users << current_user
-    @event.save
-  end
+  # def attend
+  #   @event.users << current_user
+  #   @event.save
+  # end
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -93,12 +94,12 @@ class EventsController < ApplicationController
 
   #PUT /events/1/attend
   def attend
-    current_user.events << @event
+    current_user.attend_event(@event)
     redirect_to @event, notice: 'You joined this event!'
   end
 
   def unattend
-    current_user.events.destroy(@event)
+    current_user.unattend_event(@event)
     redirect_to current_user
   end
 
