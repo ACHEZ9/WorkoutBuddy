@@ -6,8 +6,11 @@ class Event < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 }
   validates :location, presence: true
   validates :date, :time, presence: true
+  validates :sport, presence: true
+  validate :event_in_past
 
   before_save :get_dow
+  after_create :send_notifications
 
   # has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
@@ -23,6 +26,16 @@ class Event < ActiveRecord::Base
 
   def get_dow
     self.dow = self.date.wday
+  end
+
+  def send_notifications
+    NotificationsJob.perform_async(self)
+  end
+
+  def event_in_past
+    if !self.date.blank? && self.date < Date.today
+      errors.add(:date, "can't be in the past")
+    end
   end
 
 end

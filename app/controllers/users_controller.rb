@@ -13,12 +13,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def reccomendations
-    @users = User.order(:name)
+  def recommendations
+    # move this to either the model or jobs 
+    @events = current_user.events
+    @reccos = nil
+    puts "LOOK HERE"
+    puts @events
+    @e_others = Event.all
+    @e_others.each do|e|
+      unless @events.include? e
+        # look for if there's a time confict 
+        # check location 
+        # create sub methods for each search factor 
+        # add ability to make a method call more selective 
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
+      end  
     end
   end 
 
@@ -97,6 +106,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def notifications
+    @notifications = current_user.get_notifications
+  end
+
+  def delete_notification
+    current_user.delete_notification(params[:id])
+    clear_notification_count(current_user.id)
+    
+    respond_to do |format|
+      format.html {redirect_to notifications_users_path}
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -109,7 +132,6 @@ class UsersController < ApplicationController
     end
 
     def user_pref_params
-      puts "*************#{params}***************"
       params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
     end
     

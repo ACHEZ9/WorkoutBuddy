@@ -2,7 +2,7 @@
 
 <div class="container" data-no-turbolink="true">
   <div class="row">
-    <h1>All Events</h1>
+    <h1>Find Events</h1>
 
     <div class="form-group">
     <%= form_tag events_path, :method => 'get', :id => "events_search" do %>
@@ -17,16 +17,15 @@
       <div class="col-md-2">
         <label>Within:</label>
         <%= select_tag(:distance, 
-          options_for_select([["Any", ""], ["1 Mile", "1"], ["10 Miles", "10"], ["50 Miles", "50"], ["1000 Miles", "1000"]], @distance_default), class: 'form-control') %>
+          options_for_select([["Any", ""], ["1 Mile", "1"], ["5 Miles", "5"], ["10 Miles", "10"], ["25 Miles", "25"], ["50 Miles", "50"]], @distance_default), class: 'form-control') %>
       </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-6 col-md-offset-3">
+      <div class="col-md-6 col-md-offset-3">
         <%= submit_tag "Search", class: 'form-control' %>
       </div>
     <% end %>
     </div>
-    </div>
+  </div>
+</div>
 
 <table class="table table-bordered table-striped"> 
   <thead>

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :events
+    collection do
+      get 'notifications'
+      delete 'notification' => 'users#delete_notification', as: 'delete_notification'
+    end
   end
   
   resources :users, :except => [:index] do
@@ -29,7 +33,7 @@ Rails.application.routes.draw do
   get '/users/:id/preferences/new' => 'users#user_prefs_new', as:'user_prefs_new'
 
 
-  get 'reccomend' => 'user#reccomendations'
+  get 'recommendations' => 'users#recommendations'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
