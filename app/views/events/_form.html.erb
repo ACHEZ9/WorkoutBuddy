@@ -24,12 +24,16 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="field inline-select">
+            <div class="field">
               <%= f.label :time %><br>
-              <%= f.time_select :time, ampm: true, ignore_date: true, minute_step: 5%>
+              <div class="input-group bootstrap-timepicker timepicker">
+                <%= f.text_field :time, id: "timepicker1", class: "form-control input-small"%>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="field inline-select">
@@ -43,7 +47,7 @@
           <%= f.text_field :location, class: "form-control", placeholder: "Enter Location (Zip, City, or Address)" %>
         </div>
         <div class="actions">
-          <%= f.submit %>
+          <%= f.submit "Create Event", class: 'btn btn-primary' %>
         </div>
       <% end %>
     </div>
