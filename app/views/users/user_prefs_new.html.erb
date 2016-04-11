@@ -4,50 +4,43 @@
         <%= form_for @user_pref do |f| %>
           <%= f.hidden_field :user_id, value: params[:id] %>
         <div class="row">
-          <div class="col-md-2 col-md-offset-4">
-            <div class="form-group">
-              <%= f.label :sport_id %>
-              <%= f.select(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any", class: 'form-control') %>
+          <div class="center col-md-8 col-md-offset-2">
+            <h3>Select Sport</h3>
+            <%= f.select(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any", class: 'form-control') %>
+            <h3>Select Days</h3>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary">
+                <%= f.check_box :monday%>Mon
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :tuesday%>Tues
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :wednesday%>Wed
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :thursday%>Thurs
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :friday%>Fri
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :saturday%>Sat
+              </label>
+              <label class="btn btn-primary">
+                <%= f.check_box :sunday%>Sun
+              </label>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-4">
               <%= f.label :start_time %><br>
               <%= f.time_select :start_time, ampm: true, ignore_date: true, minute_step: 5%>
-            </div>
-            <div class="form-group">
               <%= f.label :end_time %><br>
               <%= f.time_select :end_time, ampm: true, ignore_date: true, minute_step: 5%>
             </div>
           </div>
-          <div class="col-md-5">
-            <div class="form-group">
-              <%= f.label :monday %>
-              <%= f.check_box :monday%>
-            </div>
-            <div class="form-group">
-              <%= f.label :tuesday %>
-              <%= f.check_box :tuesday%>
-            </div>
-            <div class="form-group">
-              <%= f.label :wednesday %>
-              <%= f.check_box :wednesday%>
-            </div>
-            <div class="form-group">
-              <%= f.label :thursday %>
-              <%= f.check_box :thursday%>
-            </div>
-            <div class="form-group">         
-              <%= f.label :friday %>
-              <%= f.check_box :friday%>
-            </div>
-            <div class="form-group">
-              <%= f.label :saturday %>
-              <%= f.check_box :saturday%>
-            </div>
-            <div class="form-group">
-              <%= f.label :sunday %>
-              <%= f.check_box :sunday%>
-            </div>
-          </div>
+          
         </div>
         <div class="row">
           <div class="col-md-4 col-md-offset-5">
