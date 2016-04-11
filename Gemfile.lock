@@ -46,6 +46,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-sass (3.2.0.0)
       sass (~> 3.2)
+    bootstrap-timepicker-rails-addon (0.5.1)
+      railties (>= 3.1, < 5.0)
     builder (3.2.2)
     byebug (8.2.2)
     climate_control (0.0.3)
@@ -82,6 +84,9 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
     json (1.8.3)
@@ -218,12 +223,14 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
   bootstrap-sass (= 3.2.0.0)
+  bootstrap-timepicker-rails-addon (~> 0.5.1)
   byebug
   coffee-rails (~> 4.1.0)
   faker
   geocoder
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-turbolinks
   paperclip (~> 4.1)
   pg
   pry

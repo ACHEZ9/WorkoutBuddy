@@ -3,6 +3,7 @@ $secondary_color: white;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-timepicker";
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;

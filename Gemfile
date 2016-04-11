@@ -45,6 +45,9 @@ gem 'redis'
 gem 'sucker_punch', '~> 2.0'
 gem 'pusher'
 
+gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
+gem 'jquery-turbolinks'
+
 
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development
