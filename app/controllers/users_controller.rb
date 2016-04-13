@@ -16,19 +16,19 @@ class UsersController < ApplicationController
   def recommendations
     # move this to either the model or jobs 
     @events = current_user.events
-    @reccos = nil
-    puts "LOOK HERE"
-    puts @events
+    #@reccos = nil
+    #puts "LOOK HERE"
+    #puts @events
     @e_others = Event.all
-    @e_others.each do|e|
-      unless @events.include? e
-        # look for if there's a time confict 
-        # check location 
-        # create sub methods for each search factor 
-        # add ability to make a method call more selective 
-
-      end  
-    end
+    #@e_others.each do|e|
+    #  unless @events.include? e
+    #    # look for if there's a time confict 
+    #    # check location 
+    #    # create sub methods for each search factor 
+    #    # add ability to make a method call more selective 
+    #  end  
+    #end
+    current_user.get_reccomendations(@events, @e_others)
   end 
 
   # GET /users/1
