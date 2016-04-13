@@ -42,4 +42,15 @@ class User < ActiveRecord::Base
   def unattend_event(event)
     self.events.destroy(event)
   end
+
+  def get_reccomendations(userEvents, allEvents)
+    @reccos = Array.new 
+    puts "LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    allEvents.each do|e|
+      unless userEvents.include? e
+        @reccos << e.sport_id
+      end  
+    end
+    puts @reccos
+  end 
 end
