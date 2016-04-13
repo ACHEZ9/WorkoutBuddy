@@ -23,7 +23,7 @@ class EventsController < ApplicationController
       @events = @events.includes(:sport)
     end
 
-    @events = @events.order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @events = @events.order(:date).paginate(:per_page => 12, :page => params[:page])
 
    respond_to do |format|
       format.html # index.html.erb
@@ -113,6 +113,13 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
+      if !params[:event][:date].blank?
+        begin
+          params[:event][:date] = Date.strptime(params[:event][:date], '%m/%d/%Y').strftime("%Y-%m-%d")
+        rescue
+          #date was not in correct format, should never happen, maybe in tests
+        end
+      end
       params.require(:event).permit(:desc, :time, :date, :location, :sport_id)
     end
 

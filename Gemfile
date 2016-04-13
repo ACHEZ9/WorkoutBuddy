@@ -40,6 +40,7 @@ gem 'faker'
 gem 'rails_admin'
 gem 'geocoder'
 gem 'will_paginate', '3.1.0'
+gem 'will_paginate-bootstrap'
 
 gem 'redis'
 gem 'sucker_punch', '~> 2.0'
