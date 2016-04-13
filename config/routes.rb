@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       delete 'notification' => 'users#delete_notification', as: 'delete_notification'
     end
   end
-  
+
   resources :users, :except => [:index] do
     resources :activities
   end
