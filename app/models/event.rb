@@ -19,6 +19,10 @@ class Event < ActiveRecord::Base
   geocoded_by :location
   after_validation :geocode, if: ->(obj){ !Rails.env.test? and obj.location.present? and obj.location_changed? }
 
+  def date_time_display
+    self.date.strftime("%a %b %d") + " at " + self.time.strftime("%I:%M %p")
+  end
+
   def reset_password?
     new_record? || password.present?
   end

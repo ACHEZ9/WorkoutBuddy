@@ -16,7 +16,7 @@
 
         <div class="field">
           <%= f.label :sport_id %><br>
-          <%= f.select :sport_id, options_from_collection_for_select(Sport.all, :id, :name), include_blank: "Select a Sport", class: "form-control"%>
+          <%= f.select :sport_id, options_from_collection_for_select(Sport.all, :id, :name), include_blank: "Select a Sport", class: "form-control" %>
         </div>
         <div class="field">
           <%= f.label :desc %><br>
@@ -28,7 +28,7 @@
               <%= f.label :time %><br>
               <div class="input-group bootstrap-timepicker timepicker">
                 <%= f.text_field :time, id: "timepicker1", class: "form-control input-small"%>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                <span class="input-group-addon btn"><i class="glyphicon glyphicon-time"></i></span>
               </div>
             </div>
           </div>
@@ -36,12 +36,16 @@
 
         <div class="row">
           <div class="col-md-6">
-            <div class="field inline-select">
+            <div class="field">
               <%= f.label :date %><br>
-              <%= f.date_select :date, order: [:month, :day, :year], class: "form-control" %>
+              <div class="input-group date">
+                <%= f.text_field :date, id: "datepicker", class: "form-control" %>
+                <span class="input-group-addon btn"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
             </div>
           </div>
         </div>
+
         <div class="field">
           <%= f.label :location %><br>
           <%= f.text_field :location, class: "form-control", placeholder: "Enter Location (Zip, City, or Address)" %>
