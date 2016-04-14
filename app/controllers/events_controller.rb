@@ -8,10 +8,10 @@ class EventsController < ApplicationController
     @distance_default = ""
     @sport_default = ""
     if !params[:distance].blank? && params[:distance].to_i > 0
-      @events = Event.near("Boston, MA", params[:distance].to_i).search(params[:search])
+      @events = Event.near("Boston, MA", params[:distance].to_i)
       @distance_default = params[:distance]
     else
-      @events = Event.search(params[:search])
+      @events = Event.all
     end
 
     if !params[:sport_id].blank?
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
       @events = @events.includes(:sport)
     end
 
-    @events = @events.order(sort_column + " " + sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @events = @events.order(:date).paginate(:per_page => 12, :page => params[:page])
 
    respond_to do |format|
       format.html # index.html.erb
@@ -53,6 +53,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        if logged_in?
+          current_user.attend_event(@event)
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -62,10 +65,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def attend
-    @event.users << current_user
-    @event.save
-  end
+  # def attend
+  #   @event.users << current_user
+  #   @event.save
+  # end
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -93,12 +96,12 @@ class EventsController < ApplicationController
 
   #PUT /events/1/attend
   def attend
-    current_user.events << @event
+    current_user.attend_event(@event)
     redirect_to @event, notice: 'You joined this event!'
   end
 
   def unattend
-    current_user.events.destroy(@event)
+    current_user.unattend_event(@event)
     redirect_to current_user
   end
 
@@ -110,11 +113,18 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :desc, :time, :date, :location, :image, :sport_id)
+      if !params[:event][:date].blank?
+        begin
+          params[:event][:date] = Date.strptime(params[:event][:date], '%m/%d/%Y').strftime("%Y-%m-%d")
+        rescue
+          #date was not in correct format, should never happen, maybe in tests
+        end
+      end
+      params.require(:event).permit(:desc, :time, :date, :location, :sport_id)
     end
 
    def sort_column
-      Event.column_names.include?(params[:sort]) || params[:sort] == 'sports.name' ? params[:sort] : "name"
+      Event.column_names.include?(params[:sort]) || params[:sort] == 'sports.name' ? params[:sort] : "date"
     end
 
     def sort_direction
