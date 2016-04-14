@@ -40,10 +40,15 @@ gem 'faker'
 gem 'rails_admin'
 gem 'geocoder'
 gem 'will_paginate', '3.1.0'
+gem 'will_paginate-bootstrap'
 
 gem 'redis'
 gem 'sucker_punch', '~> 2.0'
 gem 'pusher'
+
+gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
+gem 'bootstrap-datepicker-rails'
+gem 'jquery-turbolinks'
 
 
 gem 'rails_12factor', group: :production

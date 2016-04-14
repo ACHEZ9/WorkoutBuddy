@@ -3,7 +3,6 @@
     <tr>
       <th> <%= "Sport" %> </th>
       <th> <%= "Day" %> </th>
-      <th> <%= "Name" %> </th>
       <th> <%= "Description" %> </th>
       <th> <%= "time" %> </th>
       <th> <%= "Location" %> </th>
@@ -16,7 +15,6 @@
       <tr>
         <td><%= event.sport.name %></td>
         <td><%= event.date.strftime("%b %d, %Y") %></td>
-        <td><%= event.name %></td>
         <td><%= event.desc %></td>
         <td><%= event.time.strftime("%I:%M%p") %></td>
         <td><%= event.location %></td>
