@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
+  before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create]
   skip_before_filter :require_login, only: [:new, :create]
 
   # GET /users
@@ -133,6 +134,12 @@ class UsersController < ApplicationController
 
     def user_pref_params
       params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def check_user
+      if @user.id != current_user.id
+        render_404
+      end
     end
     
 end
