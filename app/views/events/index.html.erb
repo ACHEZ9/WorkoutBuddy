@@ -15,11 +15,20 @@
         <%= select_tag(:distance, 
           options_for_select([["Any", ""], ["1 Mile", "1"], ["5 Miles", "5"], ["10 Miles", "10"], ["25 Miles", "25"], ["50 Miles", "50"]], @distance_default), class: 'form-control', id: "distance_select") %>
       </div>
+      <div class="col-md-2">
+        <label>Of:</label>
+        <div class="input-group" id='location_message'>
+          <%= text_field_tag(:location, "", class: 'form-control', placeholder: "Enter location") %>
+          <span class="input-group-addon btn" id="getLocation"><i class="glyphicon glyphicon-screenshot"></i></span>
+        </div>
+      </div>
+      <%= hidden_field_tag :cur_lat %>
+      <%= hidden_field_tag :cur_long %>
     <% end %>
     </div>
   </div>
 
-  <div id='search_results'>
+  <div class="row" id='search_results'>
     <%= render 'results' %>
   </div>
 </div>
