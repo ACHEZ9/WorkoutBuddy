@@ -1,8 +1,11 @@
 $(document).ready(function(){
   $('#timepicker1').timepicker();
-  $('.input-group.date').datepicker();
+  $('.input-group.date').datepicker({
+    todayBtn: "linked",
+    endDate: "+1y"
+    });
   $('#sport_select').on('change', submitForm);
-  $('#distance_select').on('keyup', submitForm);
+  $('#distance_select').on('change', submitForm);
 });
 
 

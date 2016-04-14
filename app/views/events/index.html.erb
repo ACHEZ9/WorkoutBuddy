@@ -15,14 +15,12 @@
         <%= select_tag(:distance, 
           options_for_select([["Any", ""], ["1 Mile", "1"], ["5 Miles", "5"], ["10 Miles", "10"], ["25 Miles", "25"], ["50 Miles", "50"]], @distance_default), class: 'form-control', id: "distance_select") %>
       </div>
-      <div class="col-md-6 col-md-offset-3">
-        <%= submit_tag "Search", class: 'form-control' %>
-      </div>
     <% end %>
     </div>
   </div>
 
   <div id='search_results'>
+    <%= render 'results' %>
   </div>
 </div>
 
