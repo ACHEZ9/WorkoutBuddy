@@ -7,6 +7,7 @@ $(document).ready(function(){
   $('#sport_select').on('change', submitForm);
   $('#distance_select').on('change', submitForm);
   $('#getLocation').on('click', getLocation);
+  $('.thumbnail').hover(function(){}, function(){});
 });
 
 
