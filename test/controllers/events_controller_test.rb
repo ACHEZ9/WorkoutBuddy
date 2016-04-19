@@ -29,11 +29,6 @@ class EventsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @event
-    assert_response :success
-  end
-
   test "should update event" do
     patch :update, id: @event, event: { desc: @event.desc, location: @event.location, time: @event.time }
     assert_redirected_to event_path(assigns(:event))

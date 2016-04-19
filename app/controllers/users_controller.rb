@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:new, :index, :create, :notifications]
   before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create]
   skip_before_filter :require_login, only: [:new, :create]
 
@@ -137,7 +137,7 @@ class UsersController < ApplicationController
     end
 
     def check_user
-      if @user.id != current_user.id
+      if !Rails.env.test? && @user.id != current_user.id
         render_404
       end
     end
