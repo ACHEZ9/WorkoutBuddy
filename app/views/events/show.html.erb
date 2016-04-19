@@ -1,9 +1,11 @@
+
+
   <div class="sidebar" >
       <h2> Participants </h2>
         <% @event.users.each do |u| %>
             <p><%= u.name %></p>
         <% end %>
-  </div> 
+  </div>
 
   <div class="content">
 
@@ -25,22 +27,25 @@
     </p>
 
     <p>
-    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %> 
+      <strong>Suggested skill level:</strong>
+      <%= @event.skill_level %>
     </p>
 
-    <p> 
+    <
 
-    <% if (@event.users.include? current_user ) %> 
+    <p>
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
+    </p>
+
+    <p>
+
+    <% if (@event.users.include? current_user ) %>
       <%= link_to 'Unattend', unattend_path(@event), method: :post, :class => 'btn btn-mini btn-danger' %>
-    <% else %> 
+    <% else %>
       <%= link_to 'Attend', attend_path(@event), method: :post, :class => 'btn btn-mini btn-primary'  %>
-    <% end %> 
+    <% end %>
 
-
-    <%= link_to 'Edit', edit_event_path(@event), method: :post, :class => 'btn btn-mini btn-info' %> 
-    <%= link_to 'Back', events_path, method: :post, :class => 'btn btn-mini btn-default' %>
     </p>
 
-  </div> 
+  </div>
 </div>
-

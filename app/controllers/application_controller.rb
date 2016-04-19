@@ -14,5 +14,9 @@ class ApplicationController < ActionController::Base
         redirect_to root_path, notice: "Please Login to Continue"
       end
     end
+
+    def render_404
+      render file: "#{Rails.root}/public/404.html", layout: false, status: 404
+    end
     
 end

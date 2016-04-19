@@ -1,4 +1,5 @@
-<style>
+@import "bootstrap-sprokets";
+@import "bootsrap";
 
 html,
 body {
@@ -6,9 +7,6 @@ body {
     height: 100%;
 }
 
-h1 {
-  text-shadow:
-}
 
 body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -49,21 +47,3 @@ body {
 	width:150px;
   margin-right:3px;
 }
-
-</style>
-
-<!-- Header -->
-<body>
-
-  <header id="top" class="header">
-    <div class="text-vertical-center">
-        <h1>Off the Bench</h1>
-        <button type = "button" class = "btn btn-primary btn-lg">
-          Log In
-        </button>
-        <h3>Sign Up<h3>
-        <h3>About<h3>
-    </div>
-  </header>
-
-</body>

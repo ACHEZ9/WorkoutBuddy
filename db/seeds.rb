@@ -27,8 +27,9 @@ end
   time = Faker::Time.between(1.days.ago, Time.now, :day)
   date = Faker::Date.between(2.days.ago, 5.days.from_now)
   location = @zipcodes.sample
+  skill_level = rand(10)
 
-  Event.create(desc: desc, time: time, date: date, sport_id: sport[:id], location: location)
+  Event.create(desc: desc, time: time, date: date, sport_id: sport[:id], location: location, skill_level: skill_level)
   #5 req/s limit on GoogleMaps API, this will hopefully allow seed file to not fail geocoding
   sleep(0.2)
 end
@@ -39,4 +40,3 @@ users.each do |user|
   #PG AND SQLITE3 SPECIFIC SYNTAX
   user.events << Event.limit(1).order("RANDOM()")
 end
-

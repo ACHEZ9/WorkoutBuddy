@@ -1,28 +1,38 @@
 <% provide(:title, @user.name) %>
 <div>
-  <div class="sidebar">
-    <h1>
-      <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
-      <%= @user.name %>
-    </h1>
-
-    <strong>Name:</strong>
-    <%= @user.name %>
-    </br>
-    <strong>Email:</strong>
-    <%= @user.email %>
-    </br>
-    <strong>Bio:</strong>
-    <%= @user.bio %>
-    </br>
-
-    <div class="center">
-      <%= link_to 'Edit Profile', edit_user_path(@user), class: "user_link" %>
-    </div>
-
-    <div class="center">
-     <%= render 'user_pref_list' %>
-    </div>
+  <div class="row profile">
+		<div class="col-md-3">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR USERPIC -->
+				<div class="profile-userpic">
+          <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
+        </div>
+				<!-- END SIDEBAR USERPIC -->
+				<!-- SIDEBAR USER TITLE -->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						<%= @user.name %>
+					</div>
+					<div class="profile-usertitle-job">
+						Sporting since <%= @user.created_at %>
+					</div>
+				</div>
+				<!-- END SIDEBAR USER TITLE -->
+				<!-- SIDEBAR BUTTONS -->
+				<div class="profile-userbuttons">
+					<button type="button" class="btn btn-success btn-sm">Add Preferred User</button>
+				</div>
+        <div class="center">
+          <%= render 'user_pref_list' %>
+        </div>
+				<!-- END SIDEBAR BUTTONS -->
+      </div>
+		<div class="col-md-9">
+        <div class="profile-content">
+			   Some user related content goes here...
+            </div>
+		</div>
+	</div>
 
   </div>
 
@@ -59,4 +69,3 @@
 
 <%= link_to "Recommendations", recommendations_path() %> |
   <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
-

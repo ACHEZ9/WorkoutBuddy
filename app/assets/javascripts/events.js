@@ -1,22 +1,20 @@
 $(document).ready(function(){
   $('#timepicker1').timepicker();
+
   $('.input-group.date').datepicker();
 });
 
-$(document).ready(function () {
 
-    (function ($) {
 
-        $('#filter').keyup(function () {
-
-            var rex = new RegExp($(this).val(), 'i');
-            $('.searchable card').hide();
-            $('.searchable card').filter(function () {
-                return rex.test($(this).text());
-            }).show();
-
-        })
-
-    }(jQuery));
-
+  $('.input-group.date').datepicker({
+    todayBtn: "linked",
+    endDate: "+1y"
+    });
+  $('#sport_select').on('change', submitForm);
+  $('#distance_select').on('change', submitForm);
 });
+
+
+var submitForm = function() {
+  $('#events_search').submit()
+}

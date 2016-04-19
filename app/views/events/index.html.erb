@@ -5,10 +5,10 @@
     <h1>Find Events</h1>
 
     <div class="form-group">
-    <%= form_tag events_path, :method => 'get', :id => "events_search" do %>
+    <%= form_tag events_path, :method => 'get', remote: true, :id => "events_search" do %>
       <div class="col-md-2">
         <label>Sport:</label>
-        <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any", class: 'form-control') %>
+        <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :name, @sport_default), include_blank: "Any", class: 'form-control', id: "sport_select") %>
       </div>
       <div class="col-md-2">
         <label>Within:</label>
@@ -17,6 +17,8 @@
       </div>
       <div class="col-md-6 col-md-offset-3">
         <%= submit_tag "Search", class: 'form-control' %>
+        <%= select_tag(:distance,
+          options_for_select([["Any", ""], ["1 Mile", "1"], ["5 Miles", "5"], ["10 Miles", "10"], ["25 Miles", "25"], ["50 Miles", "50"]], @distance_default), class: 'form-control', id: "distance_select") %>
       </div>
     <% end %>
     </div>
@@ -26,6 +28,8 @@
     <% @events.each do |event| %>
       <%= render 'card', event: event %>
     <% end %>
+  <div id='search_results'>
+    <%= render 'results' %>
   </div>
 </div>
 

@@ -1,0 +1,5 @@
+<div class="row" style="display:flex; flex-wrap: wrap;">
+  <% @events.each do |event| %>
+    <%= render 'card', event: event %>
+  <% end %>
+</div>
