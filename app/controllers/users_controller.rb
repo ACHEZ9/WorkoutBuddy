@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, except: [:new, :index, :create, :notifications]
+  before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create]
   skip_before_filter :require_login, only: [:new, :create]
 
   # GET /users
@@ -16,19 +17,19 @@ class UsersController < ApplicationController
   def recommendations
     # move this to either the model or jobs 
     @events = current_user.events
-    @reccos = nil
-    puts "LOOK HERE"
-    puts @events
+    #@reccos = nil
+    #puts "LOOK HERE"
+    #puts @events
     @e_others = Event.all
-    @e_others.each do|e|
-      unless @events.include? e
-        # look for if there's a time confict 
-        # check location 
-        # create sub methods for each search factor 
-        # add ability to make a method call more selective 
-
-      end  
-    end
+    #@e_others.each do|e|
+    #  unless @events.include? e
+    #    # look for if there's a time confict 
+    #    # check location 
+    #    # create sub methods for each search factor 
+    #    # add ability to make a method call more selective 
+    #  end  
+    #end
+    current_user.get_reccomendations(@events, @e_others)
   end 
 
   # GET /users/1
@@ -133,6 +134,12 @@ class UsersController < ApplicationController
 
     def user_pref_params
       params.require(:user_pref).permit(:user_id, :sport_id, :start_time, :end_time, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday)
+    end
+
+    def check_user
+      if !Rails.env.test? && @user.id != current_user.id
+        render_404
+      end
     end
     
 end

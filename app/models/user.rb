@@ -31,4 +31,26 @@ class User < ActiveRecord::Base
     $redis.lrem("notifications:user:#{self.id}", 1, value)
   end
 
+  def attend_event(event)
+    self.events << event
+    if !Rails.env.test?
+      $redis.lrem("notifications:user:#{self.id}", 1, event.id)
+      Rails.cache.delete("/notifications/#{self.id}")
+    end
+  end
+
+  def unattend_event(event)
+    self.events.destroy(event)
+  end
+
+  def get_reccomendations(userEvents, allEvents)
+    @reccos = Array.new 
+    puts "LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    allEvents.each do|e|
+      unless userEvents.include? e
+        @reccos << e.sport_id
+      end  
+    end
+    puts @reccos
+  end 
 end
