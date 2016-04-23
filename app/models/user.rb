@@ -48,9 +48,70 @@ class User < ActiveRecord::Base
     puts "LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     allEvents.each do|e|
       unless userEvents.include? e
-        @reccos << e.sport_id
+        @reccos << e
       end  
     end
-    puts @reccos
+    shrink_reccos(userEvents,allEvents, 20)
+    return @reccos
+  end 
+
+  def shrink_reccos (userEvents, allEvents, size)
+    #new_or_old = rand(2) # if 1, reccomend new sports, if 0 reccomend sports the user likes already 
+    new_or_old = 0
+    filter_by_sport(userEvents, allEvents, new_or_old)
+    filter_by_time(userEvents, allEvents)
+  end 
+
+  def filter_by_sport(userEvents, allEvents, new_or_old)
+    new_reccos = Array.new
+    curr_sports = Array.new # would be more efficient as a Set, but let's go simple for now 
+    userEvents.each do|u|
+      curr_sports << u.sport_id 
+    end 
+    @reccos.each do |e|
+      temp = e.sport_id 
+      if new_or_old == 1 # reccomend new sports
+        unless curr_sports.include? temp 
+          new_reccos << e
+        end 
+      else #reccomend old sports 
+        if curr_sports.include? temp 
+          new_reccos << e
+        end
+      end 
+    end
+
+    if new_reccos.size > 0
+      @reccos = new_reccos
+    end  
+  end 
+
+  def filter_by_location(userEvents, allEvents, size, miles)
+    # how can we get a user's location without asking for it 
+  end 
+
+  def filter_by_time(userEvents, allEvents)
+    new_reccos = Array.new 
+    times = Array.new 
+    userEvents.each do |u|
+      arr = Array.new
+      arr << u.date
+      arr << u.time 
+      times << arr
+    end 
+
+    @reccos.each do |e|
+      arr = Array.new
+      arr << e.date 
+      arr << e.time 
+
+      unless times.include arr 
+        new_reccos << e
+      end 
+    end 
+
+    if new_reccos.size() > 0 
+      @reccos = new_reccos
+    end 
   end 
 end

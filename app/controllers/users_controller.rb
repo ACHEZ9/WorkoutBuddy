@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification]
-  before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create]
-  skip_before_filter :require_login, only: [:new, :create]
+  #before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification]
+  #s:check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create, :recommendations]
+  #skip_before_filter :require_login, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def recommendations
     # move this to either the model or jobs 
-    #@events = current_user.events
+    @events = current_user.events
     #@reccos = nil
     #puts "LOOK HERE"
     #puts @events
@@ -29,12 +29,15 @@ class UsersController < ApplicationController
     #    # add ability to make a method call more selective 
     #  end  
     #end
-    #current_user.get_reccomendations(@events, @e_others)
+    @events = current_user.events
+    @e_others = Event.all
+    @reccos = current_user.get_reccomendations(@events, @e_others)
   end 
 
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = current_user
   end
 
   # GET /users/new
