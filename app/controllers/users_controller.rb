@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  #before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification]
-  #s:check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create, :recommendations]
-  #skip_before_filter :require_login, only: [:new, :create]
+  before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification]
+  before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create ]
+  skip_before_filter :require_login, only: [:new, :create]
 
-  # GET /users
+   # GET /users
   # GET /users.json
   def index
     @users = User.order(:name)
@@ -15,20 +15,6 @@ class UsersController < ApplicationController
   end
 
   def recommendations
-    # move this to either the model or jobs 
-    @events = current_user.events
-    #@reccos = nil
-    #puts "LOOK HERE"
-    #puts @events
-    @e_others = Event.all
-    #@e_others.each do|e|
-    #  unless @events.include? e
-    #    # look for if there's a time confict 
-    #    # check location 
-    #    # create sub methods for each search factor 
-    #    # add ability to make a method call more selective 
-    #  end  
-    #end
     @events = current_user.events
     @e_others = Event.all
     @reccos = current_user.get_reccomendations(@events, @e_others)

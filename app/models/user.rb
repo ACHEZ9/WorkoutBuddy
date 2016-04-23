@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
       arr << e.date 
       arr << e.time 
 
-      unless times.include arr 
+      unless times.include? arr 
         new_reccos << e
       end 
     end 
