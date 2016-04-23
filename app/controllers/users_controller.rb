@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def recommendations
     # move this to either the model or jobs 
-    @events = current_user.events
+    #@events = current_user.events
     #@reccos = nil
     #puts "LOOK HERE"
     #puts @events
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     #    # add ability to make a method call more selective 
     #  end  
     #end
-    current_user.get_reccomendations(@events, @e_others)
+    #current_user.get_reccomendations(@events, @e_others)
   end 
 
   # GET /users/1

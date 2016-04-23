@@ -24,13 +24,11 @@ ActiveRecord::Schema.define(version: 20160324195538) do
   add_index "activities", ["user_id"], name: "index_activities_on_user_id"
 
   create_table "events", force: :cascade do |t|
-    t.string   "name"
     t.text     "desc"
     t.date     "date"
     t.time     "time"
     t.integer  "dow"
     t.string   "location"
-    t.text     "image"
     t.integer  "sport_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
