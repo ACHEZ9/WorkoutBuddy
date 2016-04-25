@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :userSports
   has_many :sports, :through => :userSports
   has_many :userPrefs
+  has_many :comments
 
   before_save{ self.email = email.downcase }
 
@@ -56,8 +57,8 @@ class User < ActiveRecord::Base
   end 
 
   def shrink_reccos (userEvents, allEvents, size)
-    #new_or_old = rand(2) # if 1, reccomend new sports, if 0 reccomend sports the user likes already 
-    new_or_old = 0
+    #new_or_old = 0 # for testing 
+    new_or_old = rand(2) # if 1, reccomend new sports, if 0 reccomend sports the user likes already 
     filter_by_sport(userEvents, allEvents, new_or_old)
     filter_by_time(userEvents, allEvents)
   end 

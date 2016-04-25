@@ -38,6 +38,34 @@
 
     </p>
 
+    <h4>Comments</h4>
+
+    <table class="table table-bordered">
+      <%@comments = @event.comments.order('created_at ASC')%>
+        <tr>
+          <th> Commenter </th>
+          <th> Time </th>
+          <th> Comment </th>
+        </tr>
+      <%@comments.each do |c|%>
+        <tr>
+          <td width="10%" align="right"> <%=c.user.name%> 
+          <td width="10%" align="left"><%=c.created_at.strftime("%b %d, %Y %I:%M %p")%>
+          <td width="80%"><%=c.content.html_safe%></td>
+        </tr>
+      <%end%>
+    </table>
+          <!-- create new comment -->
+        <%=form_for(Comment.new) do |f|%>
+          <%=f.label :content, 'Add a Comment'%><br>
+          <%=f.text_area :content, :cols => "90" %><br>
+          <%=f.hidden_field :user_id, value: current_user.id%>
+          <%=f.hidden_field :event_id, value: @event.id%>
+          <%=f.submit "Save Comment"%>
+        <%end%>
+      </div>
+    </div>
+
   </div> 
 </div>
 

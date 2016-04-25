@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification]
+  before_action :set_user, except: [:new, :index, :create, :notifications, :delete_notification, :recommendations]
   before_action :check_user, only: [:edit, :user_prefs, :user_prefs_new, :user_prefs_create ]
   skip_before_filter :require_login, only: [:new, :create]
 
