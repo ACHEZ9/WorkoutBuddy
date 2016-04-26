@@ -49,7 +49,7 @@ show-temp.html.erb  <div class="sidebar" >
         </tr>
       <%@comments.each do |c|%>
         <tr>
-          <td width="10%" align="right"> <%=c.user.name%> 
+          <td width="10%" align="right"> <%=c.comment%> 
           <td width="10%" align="left"><%=c.created_at.strftime("%b %d, %Y %I:%M %p")%>
           <td width="80%"><%=c.content.html_safe%></td>
         </tr>

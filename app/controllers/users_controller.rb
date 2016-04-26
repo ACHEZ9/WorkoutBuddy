@@ -24,6 +24,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = current_user
+    @events = current_user.events
+    @e_others = Event.all
+    @reccos = current_user.get_reccomendations(@events, @e_others)
   end
 
   # GET /users/new

@@ -46,29 +46,33 @@ class User < ActiveRecord::Base
 
   def get_reccomendations(userEvents, allEvents)
     @reccos = Array.new 
-    puts "LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    arb_start_size = 5
+    allEvents = filter_by_location(userEvents, arb_start_size, 5)
     allEvents.each do|e|
       unless userEvents.include? e
         @reccos << e
       end  
     end
-    shrink_reccos(userEvents,allEvents, 20)
+    shrink_reccos(userEvents)
     return @reccos
   end 
 
-  def shrink_reccos (userEvents, allEvents, size)
+  def shrink_reccos (userEvents)
     #new_or_old = 0 # for testing 
     new_or_old = rand(2) # if 1, reccomend new sports, if 0 reccomend sports the user likes already 
-    filter_by_sport(userEvents, allEvents, new_or_old)
-    filter_by_time(userEvents, allEvents)
+    filter_by_sport(userEvents, new_or_old)
+    filter_by_time(userEvents)
   end 
 
-  def filter_by_sport(userEvents, allEvents, new_or_old)
+  def filter_by_sport(userEvents, new_or_old)
     new_reccos = Array.new
     curr_sports = Array.new # would be more efficient as a Set, but let's go simple for now 
     userEvents.each do|u|
       curr_sports << u.sport_id 
     end 
+    if curr_sports.size() == 0 # Handles the case of when a user doesn't events to use
+      new_or_old = 1
+    end
     @reccos.each do |e|
       temp = e.sport_id 
       if new_or_old == 1 # reccomend new sports
@@ -87,25 +91,19 @@ class User < ActiveRecord::Base
     end  
   end 
 
-  def filter_by_location(userEvents, allEvents, size, miles)
-    # how can we get a user's location without asking for it 
-    new_prefs = Array.new
-    locations = Array.new
-    userEvents.each do|u|
-      locations << u.location
+  def filter_by_location(userEvents, size, miles)
+    if userEvents.size() > 0
+      pick = rand(userEvents.size)
+      choice = userEvents.at(pick)
+      new_events = Event.near(choice.location, miles)
+    else 
+      new_events = Event.all
     end 
 
-    #@events = Event.near(location, params[:distance].to_i)
-    pick = rand(locations.size)
-    new_location = locations[]
-    new_prefs = @reccos.where(location, miles)
-
-    if new_prefs < size 
-      
-    end
+    return new_events
   end 
 
-  def filter_by_time(userEvents, allEvents)
+  def filter_by_time(userEvents)
     new_reccos = Array.new 
     times = Array.new 
     userEvents.each do |u|
