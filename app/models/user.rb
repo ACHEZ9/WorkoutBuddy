@@ -89,6 +89,20 @@ class User < ActiveRecord::Base
 
   def filter_by_location(userEvents, allEvents, size, miles)
     # how can we get a user's location without asking for it 
+    new_prefs = Array.new
+    locations = Array.new
+    userEvents.each do|u|
+      locations << u.location
+    end 
+
+    #@events = Event.near(location, params[:distance].to_i)
+    pick = rand(locations.size)
+    new_location = locations[]
+    new_prefs = @reccos.where(location, miles)
+
+    if new_prefs < size 
+      
+    end
   end 
 
   def filter_by_time(userEvents, allEvents)

@@ -1,0 +1,81 @@
+show-temp.html.erb  <div class="sidebar" >
+      <h2> Participants </h2>
+        <% @event.users.each do |u| %>
+            <p><%= u.name %></p>
+        <% end %>
+  </div> 
+
+  <div class="content">
+
+    <p>
+      <strong>Description: </strong>
+      <%= @event.desc %>
+    </p>
+
+    <p>
+      <strong>Time:</strong>
+      <%= @event.date.strftime("%b %d, %Y") %>
+      at
+      <%= @event.time.strftime("%I:%M%p") %>
+    </p>
+
+    <p>
+      <strong>Location:</strong>
+      <%= @event.location %>
+    </p>
+
+    <p>
+    <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %> 
+    </p>
+
+    <p> 
+
+    <% if (@event.users.include? current_user ) %> 
+      <%= link_to 'Unattend', unattend_path(@event), method: :post, :class => 'btn btn-mini btn-danger' %>
+    <% else %> 
+      <%= link_to 'Attend', attend_path(@event), method: :post, :class => 'btn btn-mini btn-primary'  %>
+    <% end %> 
+
+    </p>
+
+    <h4>Comments</h4>
+
+    <table class="table table-bordered">
+      <%@comments = @event.comments.order('created_at ASC')%>
+        <tr>
+          <th> Commenter </th>
+          <th> Time </th>
+          <th> Comment </th>
+        </tr>
+      <%@comments.each do |c|%>
+        <tr>
+          <td width="10%" align="right"> <%=c.user.name%> 
+          <td width="10%" align="left"><%=c.created_at.strftime("%b %d, %Y %I:%M %p")%>
+          <td width="80%"><%=c.content.html_safe%></td>
+        </tr>
+      <%end%>
+    </table>
+          <!-- create new comment -->
+        <%=form_for(Comment.new) do |f|%>
+          <%=f.label :content, 'Add a Comment'%><br>
+          <%=f.text_area :content, :cols => "90" %><br>
+          <%=f.hidden_field :user_id, value: current_user.id%>
+          <%=f.hidden_field :event_id, value: @event.id%>
+          <%=f.submit "Save Comment"%>
+        <%end%>
+      </div>
+    </div>
+
+  </div> 
+</div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <!--Sidebar content-->
+    </div>
+    <div class="span10">
+      <!--Body content-->
+    </div>
+  </div>
+</div>
