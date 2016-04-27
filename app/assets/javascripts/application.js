@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.turbolinks
+//= require jquery.slick
 //= require bootstrap
 //= require bootstrap-timepicker
 //= require bootstrap-datepicker

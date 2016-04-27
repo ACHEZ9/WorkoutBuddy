@@ -38,10 +38,11 @@ ActiveRecord::Schema.define(version: 20160424202422) do
     t.integer  "dow"
     t.string   "location"
     t.integer  "sport_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "skill_level"
   end
 
   add_index "events", ["sport_id"], name: "index_events_on_sport_id"

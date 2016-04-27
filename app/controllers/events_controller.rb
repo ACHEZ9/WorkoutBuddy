@@ -25,11 +25,7 @@ class EventsController < ApplicationController
       @sport_default = params[:sport_id]
     end
 
-    if sort_column == 'sports.name'
-      @events = @events.includes(:sport)
-    end
-
-    @events = @events.order(:date).paginate(:per_page => 12, :page => params[:page])
+    
 
    respond_to do |format|
       format.html # index.html.erb
