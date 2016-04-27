@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   has_many :activities
   has_many :users, :through => :activities
+  has_many :comments
   belongs_to :sport
 
   validates :location, presence: true
@@ -10,6 +11,8 @@ class Event < ActiveRecord::Base
 
   before_save :get_dow
   after_create :send_notifications
+
+  attr_accessor :distance_from
 
   # has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
   # validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/

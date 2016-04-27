@@ -1,8 +1,13 @@
 <h1>Reccomendations</h1>
 
-<h2> Workin' on it - Brad </h2> 
+ <p> <%= @reccos.size() %> <p> 
 
-<%= @current_user.events.each do |e| %>
-  <%= e.name %> 
-<% end %>  
+ <div class='center' %>
+	<% @reccos.each do |event| %>
+		<%= render 'card', event: event %>
+	<% end %>
+</div>
+
+
+ 
 
