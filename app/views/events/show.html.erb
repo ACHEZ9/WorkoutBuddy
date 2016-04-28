@@ -15,6 +15,7 @@
     <div class="col-md-2">
       <h2> Participants </h2>
         <% @event.users.each do |u| %>
+            <p><%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") u.name %><p> 
             <p><%= u.name %></p>
         <% end %>
     </div>
