@@ -1,11 +1,9 @@
 
 <div class="center" >
   <h1> <%= @event.sport.name%> </h1>
-  <% if (@event.users.include? current_user ) %> 
-    <%= link_to 'Unattend', unattend_path(@event), method: :post, :class => 'btn btn-mini btn-danger' %>
-  <% else %> 
-    <%= link_to 'Attend', attend_path(@event), method: :post, :class => 'btn btn-mini btn-primary'  %>
-  <% end %> 
+  <div class="attend_button" id="attend_button_<%=@event.id%>" >
+    <%= render 'attend_button' %>
+  </div>
 </div> 
 
 <div class="container-fluid">
@@ -14,17 +12,23 @@
 
     <div class="col-md-2">
       <h2> Participants </h2>
+<<<<<<< HEAD
         <% @event.users.each do |u| %>
             <p><%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") u.name %><p> 
             <p><%= u.name %></p>
         <% end %>
+=======
+        <div id='participants_list'>
+          <%= render 'participants' %>
+        </div>
+>>>>>>> 92fdff2b346a73dd6894e7fe25700d47b8780fe4
     </div>
 
     <div class="col-md-5">
       <h2> Information </h2> 
       <h3> Date: <%= @event.date.strftime("%b %d, %Y")%> </h3>
-      <h4> Starts at: <%= @event.date.strftime("%I:%M%p")%> </h4>
-      <p> Current Number of People Going: <%= @event.users.size() %> </p> 
+      <h4> Starts at: <%= @event.time.strftime("%I:%M%p")%> </h4>
+      <p> Current Number of People Going: <span id="attend_count"><%= @event.users.size() %></span> </p> 
       <p> Event Coordinator: "Do we want to add this to the controller?" </p> 
       <p> Description <%= @event.desc%> </p>
     </div>

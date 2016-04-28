@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @events = current_user.events
+    @upcoming_events = @events.where("? <= date", Date.today).order(date: :asc, time: :asc)
     @e_others = Event.all
     @reccos = current_user.get_reccomendations(@events, @e_others)
   end
