@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  $('.upcoming_events').slick({
+  $('.upcoming_events, .recommendations').slick({
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     infinite: false
   });
 });
