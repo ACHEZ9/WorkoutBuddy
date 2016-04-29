@@ -57,6 +57,8 @@
 
 <p>Off The Bench is a database backed web application, integrating several additional services and processes into the overall system architecture. The Rails server runs a single background process to handle asynchronous jobs. This background process is what communicates with the Pusher service to notify clients of specific server events. During execution the background process also sends information to the Redis service to be cached, which is then retrieved by the application server while serving responses to clients. The application server can also insert and delete single values in the corresponding redis cache. This high level architecture is shown in the diagram below.</p>
 
+<p><img src="https://cloud.githubusercontent.com/assets/9631185/14906489/1e36f400-0d8a-11e6-98d1-8b85523b6a56.png" alt="wob_architecture"></p>
+
 <h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
