@@ -1,6 +1,7 @@
 <% provide(:title, @user.name) %> 
-<div>
-  <div class="sidebar">
+<div class="row">
+
+  <div class="col-md-3 col-xs-12" id="user_info">
     <h1>
       <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
       <%= @user.name %>
@@ -22,33 +23,29 @@
 
     <div class="center">
      <%= render 'user_pref_list' %>
+     <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
     </div>
-
   </div>
 
-  <div class="content">
-    <h1>My Upcoming Events</h1>
-      <% if @upcoming_events.count > 0 %>
-        <div class="upcoming_events">
-          <% @upcoming_events.each do |event| %>
-              <%= render 'card', event: event %>
+  <div class="col-md-9 col-xs-12">
+      <h1>My Upcoming Events</h1>
+        <% if @upcoming_events.count > 0 %>
+          <div class="upcoming_events">
+            <% @upcoming_events.each do |event| %>
+                <%= render 'card', event: event %>
+            <% end %>
+          </div>
+        <% else %>
+          <h5>
+            No Upcoming Events, <%= link_to "Find Some", events_path %>
+          </h5>
+        <% end %>
+      <h1> Recommended events </h1>
+        <div class="recommendations">
+          <% @reccos.each do |event| %>
+            <%= render 'card', event: event %>
           <% end %>
         </div>
-      <% else %>
-        <h5>
-          No Upcoming Events, <%= link_to "Find Some", events_path %>
-        </h5>
-      <% end %>
   </div>
-  <div class="content">
-    <h1> Recommended events </h1>
-      <div class="recommendations">
-        <% @reccos.each do |event| %>
-          <%= render 'card', event: event %>
-        <% end %>
-      </div>
-  </div> 
 </div>
-
-<%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
 
