@@ -1,14 +1,7 @@
-<div class="row" style="display:flex; flex-wrap: wrap;">
+<div class="upcoming_events">
 
-	<% if @reccos.size() > 3 %>
-		<%= render 'card', event: @reccos.at(0) %>
-		<%= render 'card', event: @reccos.at(1) %> 
-		<%= render 'card', event: @reccos.at(2) %>  
-	<% else %> 
-		<% @reccos.each do |event| %>
-			<%= render 'card', event: event %>
-		<% end %>
+	<% @reccos.each do |event| %>
+		<%= render 'card', event: event %>
 	<% end %>
 
-	<%= link_to "See More", recommendations_path() %> |
 </div>
