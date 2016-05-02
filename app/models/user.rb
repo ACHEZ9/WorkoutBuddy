@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :userSports
   has_many :sports, :through => :userSports
   has_many :userPrefs
+  has_many :comments
 
   before_save{ self.email = email.downcase }
 
@@ -45,12 +46,85 @@ class User < ActiveRecord::Base
 
   def get_reccomendations(userEvents, allEvents)
     @reccos = Array.new 
-    puts "LOOK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    arb_start_size = 5
+    allEvents = filter_by_location(userEvents, arb_start_size, 5)
     allEvents.each do|e|
       unless userEvents.include? e
-        @reccos << e.sport_id
+        @reccos << e
       end  
     end
-    puts @reccos
+    shrink_reccos(userEvents)
+    return @reccos
+  end 
+
+  def shrink_reccos (userEvents)
+    #new_or_old = 0 # for testing 
+    new_or_old = rand(2) # if 1, reccomend new sports, if 0 reccomend sports the user likes already 
+    filter_by_sport(userEvents, new_or_old)
+    filter_by_time(userEvents)
+  end 
+
+  def filter_by_sport(userEvents, new_or_old)
+    new_reccos = Array.new
+    curr_sports = Array.new # would be more efficient as a Set, but let's go simple for now 
+    userEvents.each do|u|
+      curr_sports << u.sport_id 
+    end 
+    if curr_sports.size() == 0 # Handles the case of when a user doesn't events to use
+      new_or_old = 1
+    end
+    @reccos.each do |e|
+      temp = e.sport_id 
+      if new_or_old == 1 # reccomend new sports
+        unless curr_sports.include? temp 
+          new_reccos << e
+        end 
+      else #reccomend old sports 
+        if curr_sports.include? temp 
+          new_reccos << e
+        end
+      end 
+    end
+
+    if new_reccos.size > 0
+      @reccos = new_reccos
+    end  
+  end 
+
+  def filter_by_location(userEvents, size, miles)
+    if userEvents.size() > 0
+      pick = rand(userEvents.size)
+      choice = userEvents.at(pick)
+      new_events = Event.near(choice.location, miles)
+    else 
+      new_events = Event.all
+    end 
+
+    return new_events
+  end 
+
+  def filter_by_time(userEvents)
+    new_reccos = Array.new 
+    times = Array.new 
+    userEvents.each do |u|
+      arr = Array.new
+      arr << u.date
+      arr << u.time 
+      times << arr
+    end 
+
+    @reccos.each do |e|
+      arr = Array.new
+      arr << e.date 
+      arr << e.time 
+
+      unless times.include? arr 
+        new_reccos << e
+      end 
+    end 
+
+    if new_reccos.size() > 0 
+      @reccos = new_reccos
+    end 
   end 
 end
