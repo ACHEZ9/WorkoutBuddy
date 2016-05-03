@@ -49,5 +49,5 @@ users.each do |user|
 end
 
 #clear event older than a week(old seed data)
-Event.where("date <= ?", Date.today - 7).destroy
+Event.where("date <= ?", Date.today - 7).destroy_all
 
