@@ -22,6 +22,10 @@
           <span class="input-group-addon btn" id="getLocation"><i class="glyphicon glyphicon-screenshot"></i></span>
         </div>
       </div>
+      <div class="col-md-2">
+        <label>Sort By:</label>
+        <%= select_tag(:order_by, options_for_select([["Distance", "distance"], ["Date", "date"]], @order_default), class: 'form-control', id: "order_by_select") %>
+      </div>
       <%= hidden_field_tag :cur_lat %>
       <%= hidden_field_tag :cur_long %>
     <% end %>
