@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   def index
     @distance_default = ""
     @sport_default = ""
+    @order_default = "distance"
     if !params[:distance].blank? && params[:distance].to_i > 0 && (!params[:location].blank? || !params[:cur_lat].blank? && !params[:cur_long].blank?)
       location = ""
       if !params[:location].blank?
@@ -25,7 +26,10 @@ class EventsController < ApplicationController
       @sport_default = params[:sport_id]
     end
 
-    
+    if params[:order_by] == "date"
+      @events = @events.reorder(:date)
+      @order_default = "date"
+    end
 
    respond_to do |format|
       format.html # index.html.erb
