@@ -20,7 +20,7 @@ end
 
 #Sports
 %w[Basketball Soccer Football Hockey Baseball Climbing Frisby Tennis].each do |name|
-  Sport.create(name: name)
+  Sport.find_or_create_by(name: name)
 end
 
 #Boston zipcodes
