@@ -1,5 +1,6 @@
-<% if (event.users.include? current_user ) %> 
-  <%= link_to 'Unattend', unattend_path(event), method: :post, :class => 'btn btn-mini btn-danger' %>
+<% event = @event if !@event.nil? %>
+<% if (event.users.include? current_user || @attending) %> 
+  <%= link_to 'Unattend', unattend_path(event), method: :post, remote: true, :class => 'btn btn-mini btn-danger', id: 'attend_button' %>
 <% else %> 
-  <%= link_to 'Attend', attend_path(event), method: :post, :class => 'btn btn-mini btn-primary'  %>
+  <%= link_to 'Attend', attend_path(event), method: :post, remote: true, :class => 'btn btn-mini btn-primary', id: 'attend_button'  %>
 <% end %> 

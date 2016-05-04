@@ -1,13 +1,13 @@
-<div class="col-sm-6 col-md-4">
+<div class="col-sm-6 col-md-4" id="event_thumbnail">
   <%= link_to event_path(event) do %>
-    <div class="thumbnail" id="event_thumbnail">
+    <div class="thumbnail">
       <div class="caption center">
         <h3><%= event.sport.name %></h3>
         <h5><%= event.date_time_display %></h5>
         <h5><%= event.location %></h5>
         <p><%= event.desc %></p>
         </br>
-        <p id="attend_button"><%= render 'attend_button', event: event %></p>
+        <p class="attend_button" id="attend_button_<%=event.id%>"><%= render 'attend_button', event: event %></p>
       </div>
     </div>
   <% end %>

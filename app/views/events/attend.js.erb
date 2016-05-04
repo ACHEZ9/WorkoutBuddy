@@ -1,0 +1,3 @@
+$('#attend_button_<%=@event.id%>').html("<%= j(render(partial: 'attend_button')) %>");
+$('#participants_list').html("<%= j(render(partial: 'participants')) %>");
+$('#attend_count').html("<%= @event.users.size() %>");

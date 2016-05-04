@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   def index
     @distance_default = ""
     @sport_default = ""
+    @order_default = "distance"
     if !params[:distance].blank? && params[:distance].to_i > 0 && (!params[:location].blank? || !params[:cur_lat].blank? && !params[:cur_long].blank?)
       location = ""
       if !params[:location].blank?
@@ -25,11 +26,10 @@ class EventsController < ApplicationController
       @sport_default = params[:sport_id]
     end
 
-    if sort_column == 'sports.name'
-      @events = @events.includes(:sport)
+    if params[:order_by] == "date"
+      @events = @events.reorder(:date)
+      @order_default = "date"
     end
-
-    @events = @events.order(:date).paginate(:per_page => 12, :page => params[:page])
 
    respond_to do |format|
       format.html # index.html.erb
@@ -104,12 +104,22 @@ class EventsController < ApplicationController
   #PUT /events/1/attend
   def attend
     current_user.attend_event(@event)
-    redirect_to @event, notice: 'You joined this event!'
+    @attending = true
+
+    respond_to do |format|
+      format.html { redirect_to @event, notice: 'You joined this event!' }
+      format.js
+    end
   end
 
   def unattend
     current_user.unattend_event(@event)
-    redirect_to current_user
+    @attending = false
+
+    respond_to do |format|
+      format.html { redirect_to current_user }
+      format.js { render action: "attend" }
+    end
   end
 
   private

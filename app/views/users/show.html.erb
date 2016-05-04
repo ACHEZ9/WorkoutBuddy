@@ -1,75 +1,50 @@
-<% provide(:title, @user.name) %> 
-<div>
-  <div class="row profile">
-		<div class="col-md-3">
-			<div class="profile-sidebar">
-				<!-- SIDEBAR USERPIC -->
-				<div class="profile-userpic">
-          <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
-        </div>
-				<!-- END SIDEBAR USERPIC -->
-				<!-- SIDEBAR USER TITLE -->
-				<div class="profile-usertitle">
-					<div class="profile-usertitle-name">
-						<%= @user.name %>
-					</div>
-					<div class="profile-usertitle-job">
-						Sporting since <%= @user.created_at %>
-					</div>
-				</div>
-				<!-- END SIDEBAR USER TITLE -->
-				<!-- SIDEBAR BUTTONS -->
-				<div class="profile-userbuttons">
-					<button type="button" class="btn btn-success btn-sm">Add Preferred User</button>
-				</div>
-        <div class="center">
-          <%= render 'user_pref_list' %>
-        </div>
-				<!-- END SIDEBAR BUTTONS -->
-      </div>
-		<div class="col-md-9">
-        <div class="profile-content">
-			   Some user related content goes here...
-            </div>
-		</div>
-	</div>
+<% provide(:title, @user.name) %>
+<div class="row">
 
+  <div class="col-md-3 col-xs-12" id="user_info">
+    <h1>
+      <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
+      <%= @user.name %>
+    </h1>
+
+    <strong>Name:</strong>
+    <%= @user.name %>
+    </br>
+    <strong>Email:</strong>
+    <%= @user.email %>
+    </br>
+    <strong>Bio:</strong>
+    <%= @user.bio %>
+    </br>
+
+    <div class="center">
+      <%= link_to 'Edit Profile', edit_user_path(@user), class: "user_link" %>
+    </div>
+
+    <div class="center">
+     <%= render 'user_pref_list' %>
+     <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
+    </div>
   </div>
 
-  <div class="content">
-    <h1>My Upcoming Events</h1>
-      <table class="table table-bordered table-striped">
-
-      <thead>
-        <tr>
-          <th> <%= "Date" %> </th>
-          <th> <%= "Description" %> </th>
-          <th> <%= "Time" %> </th>
-          <th> <%= "Location" %> </th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-      <% @user.events.order(date: :asc, time: :asc).each do |event| %>
-        <tr>
-          <% if (Date.today <= event.date) %>
-            <td><%= event.date.strftime("%b %d, %Y") %></td>
-            <td><%= event.desc %></td>
-            <td><%= event.time.strftime("%I:%M%p") %></td>
-            <td><%= event.location %></td>
-            <td><%= link_to 'Show', event, :class => 'btn btn-mini btn-info' %> </td>
-            <td><%= link_to 'Unattend', unattend_path(event), method: :post, :class => 'btn btn-mini btn-danger' %> </td>
-           <% end %>
-       </tr>
-      <% end %>
-    </table>
+  <div class="col-md-9 col-xs-12">
+      <h1>My Upcoming Events</h1>
+        <% if @upcoming_events.count > 0 %>
+          <div class="upcoming_events">
+            <% @upcoming_events.each do |event| %>
+                <%= render 'card', event: event %>
+            <% end %>
+          </div>
+        <% else %>
+          <h5>
+            No Upcoming Events, <%= link_to "Find Some", events_path %>
+          </h5>
+        <% end %>
+      <h1> Recommended events </h1>
+        <div class="recommendations">
+          <% @reccos.each do |event| %>
+            <%= render 'card', event: event %>
+          <% end %>
+        </div>
   </div>
-
-  <div class="content">
-    <h3> Your reccomended events </h3> 
-    <%= render 'recommendations' %> 
-  </div> 
 </div>
-
-  <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>

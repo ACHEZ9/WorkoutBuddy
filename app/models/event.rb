@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
-  has_many :activities
+  has_many :activities, dependent: :delete_all
   has_many :users, :through => :activities
-  has_many :comments
+  has_many :comments, dependent: :delete_all
   belongs_to :sport
 
   validates :location, presence: true

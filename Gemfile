@@ -50,6 +50,8 @@ gem 'bootstrap-timepicker-rails-addon', '~> 0.5.1'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-turbolinks'
 
+gem "jquery-slick-rails"
+
 
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development
