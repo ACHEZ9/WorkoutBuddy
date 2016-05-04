@@ -1,4 +1,4 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.name) %> 
 <div>
   <div class="row profile">
 		<div class="col-md-3">
@@ -65,7 +65,11 @@
       <% end %>
     </table>
   </div>
+
+  <div class="content">
+    <h3> Your reccomended events </h3> 
+    <%= render 'recommendations' %> 
+  </div> 
 </div>
 
-<%= link_to "Recommendations", recommendations_path() %> |
   <%= link_to "Add New Event To Watch For", user_prefs_new_path, class: 'btn btn-primary' %>
