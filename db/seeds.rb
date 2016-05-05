@@ -19,7 +19,7 @@ if User.count < 20
 end
 
 #Sports
-%w[Basketball Soccer Football Hockey Baseball Climbing Frisby Tennis].each do |name|
+%w[Basketball Soccer Football Hockey Baseball Climbing Frisbee Tennis].each do |name|
   Sport.find_or_create_by(name: name)
 end
 
@@ -48,10 +48,6 @@ users.each do |user|
     user.events << event
   end
 end
-<<<<<<< HEAD
-=======
 
 #clear event older than a week(old seed data)
 Event.where("date <= ?", Date.today - 7).destroy_all
-
->>>>>>> 9435450903cbd412f3d6d04d9a024c8098cf7351

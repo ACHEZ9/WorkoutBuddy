@@ -10,7 +10,7 @@
 
   <div class="row-fluid">
 
-    <div class="col-md-2">
+    <div class="col-md-4">
       <h2> Participants </h2>
         <div id='participants_list'>
           <%= render 'participants' %>
@@ -22,7 +22,6 @@
       <h3> Date: <%= @event.date.strftime("%b %d, %Y")%> </h3>
       <h4> Starts at: <%= @event.time.strftime("%I:%M%p")%> </h4>
       <p> Current Number of People Going: <span id="attend_count"><%= @event.users.size() %></span> </p>
-      <p> Event Coordinator: "Do we want to add this to the controller?" </p>
       <p> Description <%= @event.desc%> </p>
     </div>
 
