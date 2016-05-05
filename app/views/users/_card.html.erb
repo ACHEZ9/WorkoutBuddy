@@ -2,12 +2,13 @@
   <%= link_to event_path(event) do %>
     <div class="thumbnail">
       <div class="caption center">
-        <h3><%= event.sport.name %></h3>
-        <h5><%= event.date_time_display %></h5>
-        <h5><%= event.location %></h5>
+        <h4 style="position:relative;top:-10px;left:-70px;"><b><%= event.sport.name %></b></h4>
+        <%= render 'icon', event: event %>
+        <h6><%= event.date_time_display %></h6>
+        <h6><%= event.location %></h6>
         <p><%= event.desc %></p>
         </br>
-        <p id="attend_button"><%= render 'attend_button', event: event %></p>
+        <p class="attend_button" id="attend_button_<%=event.id%>"><%= render 'attend_button', event: event %></p>
       </div>
     </div>
   <% end %>
