@@ -6,15 +6,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <% if logged_in? %>
-                <a class="navbar-brand page-scroll" href="/sessions/new">
+                <a class="navbar-brand page-scroll" href="/home">
                     <i class="fa fa-play-circle"></i>  <span class="light">Off</span> the Bench
                 </a>
-                <% else %>
-                <a class="navbar-brand page-scroll" href="/home">
-                    <i class="fa fa-play-circle"></i>  Off the Bench
-                </a>
-                <% end %>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,4 +41,4 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-      </nav>
+    </nav>

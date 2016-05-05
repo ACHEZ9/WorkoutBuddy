@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
+  root 'sessions#new'
 
   resources :comments
-  root 'sessions#new'
 
   get 'sessions/new'
 
