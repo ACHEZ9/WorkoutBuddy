@@ -40,7 +40,7 @@
 
 <body>
   <div class="container">
-    <h2 class="text-center"> Comments </h2>
+    <h2 class="text-left"> Comments </h2>
     <div class="center">
       <table class="table table-bordered">
       <%@comments = @event.comments.order('created_at ASC')%>
@@ -53,7 +53,7 @@
         <tr>
           <td width="10%" align="right"> <%=c.user.name%>
           <td width="10%" align="left"><%=c.created_at.strftime("%b %d, %Y %I:%M %p")%>
-          <td width="80%"><%=c.content.html_safe%></td>
+          <td width="60%" align="left"><%=c.content.html_safe%></td>
         </tr>
       <%end%>
     </table>

@@ -1,3 +1,6 @@
 <% @event.users.each do |u| %>
-    <p><%= u.name %></p>
+    <h5>
+     <%= image_tag(u.avatar.url(:thumb), class: "round-image-50") %>
+     <%= u.name %>
+ 	</h5>
 <% end %>
