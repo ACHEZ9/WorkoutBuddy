@@ -94,7 +94,6 @@ p {
   width: 80%;
 }
 
-<<<<<<< HEAD
 /* Profile container */
 .profile {
   margin: 20px 0;
@@ -293,26 +292,6 @@ p {
   a:hover{
     color: black;
     text-decoration: none;
-  }
-}
-
-/*NavBar*/
-.navbar {
-  background-color: $primary_color;
-  padding: 5px;
-  .nav li{
-    a, a:visited{
-      color: $secondary_color;
-    }
-    a:hover{
-      color: black
-    }
-
-    .navbar-custom.top-nav-collapse {
-        padding: 0;
-        border-bottom: 1px solid rgba(255,255,255,.3);
-        background: #000;
-    }
   }
 }
 
