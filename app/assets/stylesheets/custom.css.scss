@@ -219,7 +219,7 @@ p {
 }
 
 .navbar-custom .navbar-brand:hover {
-    background-color: gray;
+    background-color: black;
     border-radius: 25px;
 }
 
@@ -284,6 +284,11 @@ p {
 #user_info {
   background-color: $primary_color;
   padding-bottom: 50px;
+  position: relative;
+  top: 30px;
+  border-radius: 25px;
+  border-color: black;
+  border-width: thick;
 
   a{
     color: $secondary_color;
