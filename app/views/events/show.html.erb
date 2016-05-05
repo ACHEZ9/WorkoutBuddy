@@ -10,7 +10,7 @@
 
   <div class="row-fluid">
 
-    <div class="col-md-4">
+    <div class="col-md-2">
       <h2> Participants </h2>
         <div id='participants_list'>
           <%= render 'participants' %>
@@ -22,7 +22,7 @@
       <h3> Date: <%= @event.date.strftime("%b %d, %Y")%> </h3>
       <h4> Starts at: <%= @event.time.strftime("%I:%M%p")%> </h4>
       <p> Current Number of People Going: <span id="attend_count"><%= @event.users.size() %></span> </p>
-      <p> Description <%= @event.desc%> </p>
+      <p> Description: <%= @event.desc%> </p>
     </div>
 
     <div class="col-md-5">

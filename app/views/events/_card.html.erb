@@ -2,7 +2,7 @@
   <%= link_to event_path(event) do %>
     <div class="thumbnail">
       <div class="caption center">
-        <h5 style="position:relative;top:-10px;left:-125px;"><b><%= event.sport.name %></b></h5>
+        <h4 style="position:relative;top:-10px;left:-125px;"><b><%= event.sport.name %></b></h4>
         <%= render 'icon', event: event %>
         <h6><%= event.date_time_display %></h6>
         <h6><%= event.location %></h6>
