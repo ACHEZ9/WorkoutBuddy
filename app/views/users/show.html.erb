@@ -1,7 +1,7 @@
-<% provide(:title, @user.name) %> 
+<% provide(:title, @user.name) %>
 <div class="row">
 
-  <div class="col-md-3 col-xs-12" id="user_info">
+  <div class="col-md-3 col-xs-12" id="user_info" style="position:relative;left:-15px;">
     <h1>
       <%= image_tag(current_user.avatar.url(:thumb), class: "round-image-50") %>
       <%= @user.name %>
@@ -17,8 +17,8 @@
     <%= @user.bio %>
     </br>
 
-    <div class="center">
-      <%= link_to 'Edit Profile', edit_user_path(@user), class: "user_link" %>
+    <div class="center" style="border-color:black;border-thickness=medium;">
+      <%= link_to 'Edit Profile', edit_user_path(@user), class: "user_link", class: 'btn btn-active' %>
     </div>
 
     <div class="center">
@@ -48,4 +48,3 @@
         </div>
   </div>
 </div>
-

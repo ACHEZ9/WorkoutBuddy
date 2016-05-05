@@ -7,7 +7,8 @@ class CreateEvents < ActiveRecord::Migration
       t.integer :dow
       t.string :location
       t.references :sport, index: true, foreign_key: true
-      
+      t.integer :skill_level
+
       t.timestamps null: false
     end
   end

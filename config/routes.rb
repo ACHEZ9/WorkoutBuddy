@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  resources :comments
+
   root 'sessions#new'
+
+  resources :comments
 
   get 'sessions/new'
 
+  get 'home' => 'static_pages#home'
+  get 'help' => 'static_pages#help'
+  get 'about' => 'static_pages#about'
+  get 'contact' => 'static_pages#contact'
 
   resources :users do
     resources :events
@@ -12,7 +18,7 @@ Rails.application.routes.draw do
       delete 'notification' => 'users#delete_notification', as: 'delete_notification'
     end
   end
-  
+
   resources :users, :except => [:index] do
     resources :activities
   end

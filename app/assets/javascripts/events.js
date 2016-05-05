@@ -20,7 +20,7 @@ var submitForm = function() {
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(onSuccess, showError,{timeout:5000});
-    } else { 
+    } else {
         document.getElementById("location_message").innerHTML = "Geolocation is not supported by this browser.";
     }
 }

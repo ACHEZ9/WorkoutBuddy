@@ -28,3 +28,7 @@
 .pretty th .desc {
   background-image: url(/images/down_arrow.gif);
 }
+
+html, body{
+  background-color: rgba(192,192,192,0.1);
+}

@@ -1,0 +1,27 @@
+<style>
+
+img {
+  width: 100px;
+  height: 100px;
+}
+
+</style>
+
+<% event = @event if !@event.nil? %>
+<% if event.sport.name == "Basketball" %>
+  <img src="/images/icons/BasketballIcon.png" alt="Basketball">
+<% elsif event.sport.name == "Baseball" %>
+  <img src="/images/icons/BaseballIcon.png" alt="Baseball">
+<% elsif event.sport.name == "Climbing" %>
+  <img src="/images/icons/ClimbingIcon.png" alt="Climbing">
+<% elsif event.sport.name == "Football" %>
+  <img src="/images/icons/FootballIcon.png" alt="Football">
+<% elsif event.sport.name == "Frisby" %>
+    <img src="/images/icons/FrisbeeIcon.png" alt="Frisby">
+<% elsif event.sport.name == "Tennis" %>
+    <img src="/images/icons/TennisIcon.png" alt="Tennis">
+<% elsif event.sport.name == "Hockey" %>
+    <img src="/images/icons/HockeyIcon.png" alt="Hockey">
+<% else %>
+    <img src="/images/icons/SoccerIcon.png" alt="Soccer">
+<% end %>

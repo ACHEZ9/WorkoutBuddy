@@ -19,7 +19,7 @@ if User.count < 20
 end
 
 #Sports
-%w[Basketball Soccer Football Hockey Baseball Climbing Frisby Tennis].each do |name|
+%w[Basketball Soccer Football Hockey Baseball Climbing Frisbee Tennis].each do |name|
   Sport.find_or_create_by(name: name)
 end
 
@@ -30,10 +30,11 @@ end
   sport = Sport.limit(1).order("RANDOM()").first
   desc = Faker::Hacker.say_something_smart
   time = Faker::Time.between(1.days.ago, Time.now, :day)
+  skill_level = rand(10)
   date = Faker::Date.between(1.days.from_now, 5.days.from_now)
   location = @locations.sample
 
-  Event.create(desc: desc, time: time, date: date, sport_id: sport[:id], location: location)
+  Event.create(desc: desc, time: time, date: date, sport_id: sport[:id], location: location, skill_level: skill_level)
   #5 req/s limit on GoogleMaps API, this will hopefully allow seed file to not fail geocoding
   sleep(0.2)
 end
@@ -50,4 +51,3 @@ end
 
 #clear event older than a week(old seed data)
 Event.where("date <= ?", Date.today - 7).destroy_all
-

@@ -4,7 +4,7 @@
   <div class="attend_button" id="attend_button_<%=@event.id%>" >
     <%= render 'attend_button' %>
   </div>
-</div> 
+</div>
 
 <div class="container-fluid">
 
@@ -18,18 +18,17 @@
     </div>
 
     <div class="col-md-5">
-      <h2> Information </h2> 
+      <h2> Information </h2>
       <h3> Date: <%= @event.date.strftime("%b %d, %Y")%> </h3>
       <h4> Starts at: <%= @event.time.strftime("%I:%M%p")%> </h4>
-      <p> Current Number of People Going: <span id="attend_count"><%= @event.users.size() %></span> </p> 
-      <p> Event Coordinator: "Do we want to add this to the controller?" </p> 
-      <p> Description <%= @event.desc%> </p>
+      <p> Current Number of People Going: <span id="attend_count"><%= @event.users.size() %></span> </p>
+      <p> Description: <%= @event.desc%> </p>
     </div>
 
     <div class="col-md-5">
-      <h2 class="text-center"> Location </h2> 
+      <h2 class="text-center"> Location </h2>
       <p>
-        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %> 
+        <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@event.latitude}%2C#{@event.longitude}" %>
       </p>
       <p class="text-right"> <%= @event.location%> </p>
     </div>
@@ -40,7 +39,7 @@
 
 <body>
   <div class="container">
-    <h2 class="text-left"> Comments </h2> 
+    <h2 class="text-left"> Comments </h2>
     <div class="center">
       <table class="table table-bordered">
       <%@comments = @event.comments.order('created_at ASC')%>
@@ -51,7 +50,7 @@
         </tr>
       <%@comments.each do |c|%>
         <tr>
-          <td width="10%" align="right"> <%=c.user.name%> 
+          <td width="10%" align="right"> <%=c.user.name%>
           <td width="10%" align="left"><%=c.created_at.strftime("%b %d, %Y %I:%M %p")%>
           <td width="60%" align="left"><%=c.content.html_safe%></td>
         </tr>
