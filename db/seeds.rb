@@ -20,7 +20,7 @@ end
 
 #Sports
 %w[Basketball Soccer Football Hockey Baseball Climbing Frisby Tennis].each do |name|
-  Sport.create(name: name)
+  Sport.find_or_create_by(name: name)
 end
 
 #Boston zipcodes
@@ -49,5 +49,5 @@ users.each do |user|
 end
 
 #clear event older than a week(old seed data)
-Event.where("date <= ?", Date.today - 7).destroy
+Event.where("date <= ?", Date.today - 7).destroy_all
 

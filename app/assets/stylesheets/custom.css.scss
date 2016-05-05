@@ -127,6 +127,7 @@ p {
 #event_thumbnail{
   div:hover{
     border-color: $primary_color;
+    border-width: 3px;
   }
   a:hover{
     color: inherit;
@@ -145,6 +146,17 @@ p {
 .attend_button{
   a, a:visited, a:hover, a:active {
     color: white;
+  }
+}
+
+#simple_link{
+  a{
+    color: $primary_color;
+  }
+  a:hover{
+    color: black;
+    text-decoration: none;
+    background-color: white;
   }
 }
 
